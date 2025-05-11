@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		765726532DD10FB40018EB3D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 765726522DD10FB40018EB3D /* SnapKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		76571CF72DCF38EB0018EB3D /* KB-STARBANKING.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KB-STARBANKING.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				765726532DD10FB40018EB3D /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = "KB-STARBANKING";
 			packageProductDependencies = (
+				765726522DD10FB40018EB3D /* SnapKit */,
 			);
 			productName = "KB-STARBANKING";
 			productReference = 76571CF72DCF38EB0018EB3D /* KB-STARBANKING.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = 76571CEE2DCF38EB0018EB3D;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				765726512DD10FB40018EB3D /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 76571CF82DCF38EB0018EB3D /* Products */;
 			projectDirPath = "";
@@ -335,6 +344,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		765726512DD10FB40018EB3D /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		765726522DD10FB40018EB3D /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 765726512DD10FB40018EB3D /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 76571CEF2DCF38EB0018EB3D /* Project object */;
 }
