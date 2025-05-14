@@ -20,7 +20,7 @@ class InterestRateViewController : UIViewController {
     }
     
     private func setLayout() {
-        [titleLabel,cancelButton,accountLabel,blueLineView,accountNumberLabel,accountDivView,durationLabel, newDateLabel, endDateLabel,accountDivView2,basicrateLabel,rateinfoLabel,preferLabel,cautionLabel,caution2Label].forEach{
+        [titleLabel,cancelButton,accountLabel,blueLineView,accountNumberLabel,accountDivView,durationLabel,durationInfoLabel,newDateLabel,newDateInfoLabel, endDateLabel,endDateInfoLabel,accountDivView2,basicrateLabel,rateinfoLabel,preferLabel,cautionLabel,caution2Label].forEach{
             view.addSubview($0)
         }
 
@@ -60,22 +60,32 @@ class InterestRateViewController : UIViewController {
             $0.top.equalTo(accountDivView.snp.bottom).offset(17)
             $0.leading.equalToSuperview().inset(40)
         }
+        durationInfoLabel.snp.makeConstraints{
+            $0.top.equalTo(accountDivView.snp.bottom).offset(17)
+            $0.trailing.equalToSuperview().inset(40)
+        }
         newDateLabel.snp.makeConstraints {
             $0.top.equalTo(durationLabel.snp.bottom).offset(11)
             $0.leading.equalToSuperview().inset(40)
+        }
+        newDateInfoLabel.snp.makeConstraints{
+            $0.top.equalTo(durationLabel.snp.bottom).offset(11)
+            $0.trailing.equalToSuperview().inset(40)
         }
         endDateLabel.snp.makeConstraints{
             $0.top.equalTo(newDateLabel.snp.bottom).offset(11)
             $0.leading.equalToSuperview().inset(40)
         }
-        
+        endDateInfoLabel.snp.makeConstraints{
+            $0.top.equalTo(newDateLabel.snp.bottom).offset(11)
+            $0.trailing.equalToSuperview().inset(40)
+        }
         accountDivView2.snp.makeConstraints{
-            $0.top.equalTo(accountDivView.snp.bottom).offset(122)
+            $0.top.equalTo(accountDivView.snp.bottom).offset(115)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(329)
             $0.height.equalTo(1)
         }
-
         basicrateLabel.snp.makeConstraints {
             $0.top.equalTo(accountNumberLabel.snp.bottom).offset(170)
             $0.leading.equalToSuperview().inset(40)
@@ -141,13 +151,28 @@ class InterestRateViewController : UIViewController {
         $0.font = UIFont(name: "Pretendard-Light", size: 16)
         $0.textColor = UIColor(named: "Black")
     }
+    private let durationInfoLabel = UILabel().then{
+        $0.text = "12 개월"
+        $0.font = UIFont(name: "Pretendard-Light", size: 16)
+        $0.textColor = UIColor(named: "Black")
+    }
     private let newDateLabel = UILabel().then{
         $0.text = "신규일"
         $0.font = UIFont(name: "Pretendard-Light", size: 16)
         $0.textColor = UIColor(named: "Black")
     }
+    private let newDateInfoLabel = UILabel().then{
+        $0.text = "2025.10.23"
+        $0.font = UIFont(name: "Pretendard-Light", size: 16)
+        $0.textColor = UIColor(named: "Black")
+    }
     private let endDateLabel = UILabel().then{
         $0.text = "만기일"
+        $0.font = UIFont(name: "Pretendard-Light", size: 16)
+        $0.textColor = UIColor(named: "Black")
+    }
+    private let endDateInfoLabel = UILabel().then{
+        $0.text = "2025.10.23"
         $0.font = UIFont(name: "Pretendard-Light", size: 16)
         $0.textColor = UIColor(named: "Black")
     }
