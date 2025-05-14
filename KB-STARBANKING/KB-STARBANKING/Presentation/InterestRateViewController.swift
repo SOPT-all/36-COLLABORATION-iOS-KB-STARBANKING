@@ -20,7 +20,7 @@ class InterestRateViewController : UIViewController {
     }
     
     private func setLayout() {
-        [titleLabel,cancelButton,accountLabel,blueLineView,accountNumberLabel,accountDivView,accountDivView2,basicrateLabel,rateinfoLabel,preferLabel,cautionLabel,caution2Label].forEach{
+        [titleLabel,cancelButton,accountLabel,blueLineView,accountNumberLabel,accountDivView,durationLabel, newDateLabel, endDateLabel,accountDivView2,basicrateLabel,rateinfoLabel,preferLabel,cautionLabel,caution2Label].forEach{
             view.addSubview($0)
         }
 
@@ -50,14 +50,27 @@ class InterestRateViewController : UIViewController {
             $0.top.equalTo(accountLabel.snp.bottom).offset(5)
             $0.leading.equalToSuperview().inset(40)
         }
-        accountDivView.snp.makeConstraints{
+        accountDivView.snp.makeConstraints {
             $0.top.equalTo(accountNumberLabel.snp.bottom).offset(25)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(329)
             $0.height.equalTo(1)
         }
+        durationLabel.snp.makeConstraints {
+            $0.top.equalTo(accountDivView.snp.bottom).offset(17)
+            $0.leading.equalToSuperview().inset(40)
+        }
+        newDateLabel.snp.makeConstraints {
+            $0.top.equalTo(durationLabel.snp.bottom).offset(11)
+            $0.leading.equalToSuperview().inset(40)
+        }
+        endDateLabel.snp.makeConstraints{
+            $0.top.equalTo(newDateLabel.snp.bottom).offset(11)
+            $0.leading.equalToSuperview().inset(40)
+        }
+        
         accountDivView2.snp.makeConstraints{
-            $0.top.equalTo(accountDivView.snp.bottom).offset(100)
+            $0.top.equalTo(accountDivView.snp.bottom).offset(122)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(329)
             $0.height.equalTo(1)
@@ -122,6 +135,21 @@ class InterestRateViewController : UIViewController {
     private let accountDivView = UIView().then{
         $0.backgroundColor = UIColor(named: "Black")
         $0.alpha = 0.1
+    }
+    private let durationLabel = UILabel().then{
+        $0.text = "계약기간"
+        $0.font = UIFont(name: "Pretendard-Light", size: 16)
+        $0.textColor = UIColor(named: "Black")
+    }
+    private let newDateLabel = UILabel().then{
+        $0.text = "신규일"
+        $0.font = UIFont(name: "Pretendard-Light", size: 16)
+        $0.textColor = UIColor(named: "Black")
+    }
+    private let endDateLabel = UILabel().then{
+        $0.text = "만기일"
+        $0.font = UIFont(name: "Pretendard-Light", size: 16)
+        $0.textColor = UIColor(named: "Black")
     }
     private let accountDivView2 = UIView().then{
         $0.backgroundColor = UIColor(named: "Black")
