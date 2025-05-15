@@ -23,6 +23,16 @@ class InterestRateViewController : UIViewController {
         [titleLabel,cancelButton,accountLabel,blueLineView,accountNumberLabel,accountDivView,durationLabel,durationInfoLabel,newDateLabel,newDateInfoLabel, endDateLabel,endDateInfoLabel,accountDivView2,basicrateLabel,rateinfoLabel,preferLabel,cautionLabel,caution2Label].forEach{
             view.addSubview($0)
         }
+        [rateTableHeaderStack, rateTableValueStack].forEach {
+            view.addSubview($0)
+        }
+        [termTitleLabel, rateTitleLabel].forEach {
+            rateTableHeaderStack.addArrangedSubview($0)
+        }
+                
+        [termValueLabel, rateValueLabel].forEach {
+            rateTableValueStack.addArrangedSubview($0)
+        }
 
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(70)
@@ -88,16 +98,16 @@ class InterestRateViewController : UIViewController {
         }
         basicrateLabel.snp.makeConstraints {
             $0.top.equalTo(accountNumberLabel.snp.bottom).offset(170)
-            $0.leading.equalToSuperview().inset(40)
+            $0.leading.equalToSuperview().inset(30)
         }
 
         rateinfoLabel.snp.makeConstraints {
             $0.top.equalTo(basicrateLabel.snp.bottom).offset(15)
-            $0.leading.equalToSuperview().inset(40)
+            $0.leading.equalToSuperview().inset(30)
         }
 
         preferLabel.snp.makeConstraints {
-            $0.bottom.equalTo(cautionLabel.snp.top).offset(-250)
+            $0.bottom.equalTo(cautionLabel.snp.top).offset(-225)
             $0.leading.equalToSuperview().inset(40)
         }
      
@@ -111,6 +121,17 @@ class InterestRateViewController : UIViewController {
             $0.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(20)
             $0.leading.equalToSuperview().inset(40)
             $0.trailing.equalToSuperview().inset(40)
+        }
+        rateTableHeaderStack.snp.makeConstraints {
+            $0.top.equalTo(rateinfoLabel.snp.bottom).offset(10)
+            $0.leading.trailing.equalToSuperview().inset(30)
+            $0.height.equalTo(44)
+        }
+                
+        rateTableValueStack.snp.makeConstraints {
+            $0.top.equalTo(rateTableHeaderStack.snp.bottom)
+            $0.leading.trailing.equalTo(rateTableHeaderStack)
+            $0.height.equalTo(44)
         }
         
     }
@@ -192,6 +213,49 @@ class InterestRateViewController : UIViewController {
         $0.font = UIFont(name: "Pretendard-Light", size: 13)
         $0.textColor = UIColor(named: "Black")
         $0.alpha = 0.5
+    }
+    
+    private let rateTableHeaderStack = UIStackView().then {
+        $0.axis = .horizontal
+        $0.distribution = .fillEqually
+        $0.alignment = .center
+        //$0.spacing = 0
+        $0.backgroundColor = UIColor(named: "Gray1")
+    }
+        
+    private let rateTableValueStack = UIStackView().then {
+        $0.axis = .horizontal
+        $0.distribution = .fillEqually
+        $0.alignment = .center
+        //$0.spacing = 0
+    }
+    
+    private let termTitleLabel = UILabel().then {
+        $0.text = "적용기간"
+        $0.font = UIFont(name: "Pretendard-Light", size: 14)
+        $0.textAlignment = .center
+        $0.textColor = UIColor(named: "gray6")
+    }
+        
+    private let rateTitleLabel = UILabel().then {
+        $0.text = "기본이율"
+        $0.font = UIFont(name: "Pretendard-Light", size: 14)
+        $0.textAlignment = .center
+        $0.textColor = UIColor(named: "gray6")
+    }
+
+    private let termValueLabel = UILabel().then {
+        $0.text = "2025.04.23~2025.10.22"
+        $0.font = UIFont(name: "Pretendard-Regular", size: 14)
+        $0.textAlignment = .center
+        $0.textColor = UIColor(named: "Black")
+    }
+        
+    private let rateValueLabel = UILabel().then {
+        $0.text = "2.3"
+        $0.font = UIFont(name: "Pretendard-Regular", size: 14)
+        $0.textAlignment = .center
+        $0.textColor = UIColor(named: "Black")
     }
     
     private let preferLabel = UILabel().then{
