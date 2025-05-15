@@ -9,8 +9,8 @@ import UIKit
 
 enum KBColor: String {
 
-    case black = "KbBlack"
-    case white = "KbWhite"
+    case kbBlack = "KBBlack"
+    case kbWhite = "KBWhite"
 
     case gr1 = "GR1"
     case gr2 = "GR2"
