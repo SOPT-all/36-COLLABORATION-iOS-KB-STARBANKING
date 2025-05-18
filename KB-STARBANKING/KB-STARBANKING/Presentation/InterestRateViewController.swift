@@ -12,142 +12,158 @@ import Then
 
 class InterestRateViewController : UIViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-       
-        view.backgroundColor = .white
-        setLayout()
-    }
-    
-    private func setLayout() {
-        [titleLabel,cancelButton,accountLabel,blueLineView,accountNumberLabel,accountDivView,durationLabel,durationInfoLabel,newDateLabel,newDateInfoLabel, endDateLabel,endDateInfoLabel,accountDivView2,basicrateLabel,rateinfoLabel,preferLabel,cautionLabel,caution2Label].forEach{
-            view.addSubview($0)
-        }
-        
-        [rateTableHeaderStack, rateTableValueStack].forEach {
-            view.addSubview($0)
-        }
-        
-        [termTitleLabel, rateTitleLabel].forEach {
-            rateTableHeaderStack.addArrangedSubview($0)
-        }
-                
-        [termValueLabel, rateValueLabel].forEach {
-            rateTableValueStack.addArrangedSubview($0)
+    private let scrollView = UIScrollView().then {
+            $0.showsVerticalScrollIndicator = false
         }
 
-        titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(70)
-            $0.leading.equalToSuperview().inset(40)
+        private let contentView = UIView()
+        private lazy var interestRateCollectionView = RateViewController().createCollectionView()
+
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            view.backgroundColor = .white
+            setupScrollView()
+            setLayout()
         }
 
-        cancelButton.snp.makeConstraints {
-            $0.width.height.equalTo(24)
-            $0.top.equalToSuperview().inset(70)
-            $0.trailing.equalToSuperview().inset(40)
-        }
-
-        accountLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(35)
-            $0.leading.equalToSuperview().inset(40)
-        }
-        
-        blueLineView.snp.makeConstraints {
-            $0.trailing.equalTo(accountLabel.snp.leading).offset(-8)
-            $0.top.equalTo(accountLabel.snp.top)
-            $0.width.equalTo(3)
-            $0.height.equalTo(41)
+        private func setupScrollView() {
+            view.addSubview(scrollView)
+            scrollView.snp.makeConstraints {
+                $0.edges.equalTo(view.safeAreaLayoutGuide)
             }
 
-        accountNumberLabel.snp.makeConstraints {
-            $0.top.equalTo(accountLabel.snp.bottom).offset(5)
-            $0.leading.equalToSuperview().inset(40)
-        }
-        
-        accountDivView.snp.makeConstraints {
-            $0.top.equalTo(accountNumberLabel.snp.bottom).offset(25)
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(329)
-            $0.height.equalTo(1)
-        }
-        
-        durationLabel.snp.makeConstraints {
-            $0.top.equalTo(accountDivView.snp.bottom).offset(17)
-            $0.leading.equalToSuperview().inset(40)
-        }
-        
-        durationInfoLabel.snp.makeConstraints{
-            $0.top.equalTo(accountDivView.snp.bottom).offset(17)
-            $0.trailing.equalToSuperview().inset(40)
-        }
-        
-        newDateLabel.snp.makeConstraints {
-            $0.top.equalTo(durationLabel.snp.bottom).offset(11)
-            $0.leading.equalToSuperview().inset(40)
-        }
-        
-        newDateInfoLabel.snp.makeConstraints{
-            $0.top.equalTo(durationLabel.snp.bottom).offset(11)
-            $0.trailing.equalToSuperview().inset(40)
-        }
-        
-        endDateLabel.snp.makeConstraints{
-            $0.top.equalTo(newDateLabel.snp.bottom).offset(11)
-            $0.leading.equalToSuperview().inset(40)
-        }
-        
-        endDateInfoLabel.snp.makeConstraints{
-            $0.top.equalTo(newDateLabel.snp.bottom).offset(11)
-            $0.trailing.equalToSuperview().inset(40)
-        }
-        
-        accountDivView2.snp.makeConstraints{
-            $0.top.equalTo(accountDivView.snp.bottom).offset(115)
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(329)
-            $0.height.equalTo(1)
-        }
-        
-        basicrateLabel.snp.makeConstraints {
-            $0.top.equalTo(accountNumberLabel.snp.bottom).offset(170)
-            $0.leading.equalToSuperview().inset(30)
+            scrollView.addSubview(contentView)
+            contentView.snp.makeConstraints {
+                $0.edges.equalToSuperview()
+                $0.width.equalToSuperview() // 중요: 가로 제약 고정
+            }
         }
 
-        rateinfoLabel.snp.makeConstraints {
-            $0.top.equalTo(basicrateLabel.snp.bottom).offset(15)
-            $0.leading.equalToSuperview().inset(30)
-        }
+        private func setLayout() {
+            [
+                titleLabel, cancelButton, accountLabel, blueLineView,
+                accountNumberLabel, accountDivView,
+                durationLabel, durationInfoLabel,
+                newDateLabel, newDateInfoLabel,
+                endDateLabel, endDateInfoLabel,
+                accountDivView2, basicrateLabel, rateinfoLabel,
+                rateTableHeaderStack, rateTableValueStack,
+                preferLabel,interestRateCollectionView,
+                cautionLabel, caution2Label
+            ].forEach {
+                contentView.addSubview($0)
+            }
 
-        preferLabel.snp.makeConstraints {
-            $0.top.equalTo(rateTableValueStack.snp.bottom).offset(20)
-            $0.leading.equalToSuperview().inset(40)
-        }
-     
-        cautionLabel.snp.makeConstraints {
-            $0.bottom.equalTo(caution2Label.snp.top).offset(-15)
-            $0.leading.equalToSuperview().inset(40)
-            $0.trailing.equalToSuperview().inset(40)
+            [termTitleLabel, rateTitleLabel].forEach {
+                rateTableHeaderStack.addArrangedSubview($0)
+            }
+            [termValueLabel, rateValueLabel].forEach {
+                rateTableValueStack.addArrangedSubview($0)
+            }
+
+            titleLabel.snp.makeConstraints {
+                $0.top.equalToSuperview().inset(20)
+                $0.leading.equalToSuperview().inset(40)
+            }
+            cancelButton.snp.makeConstraints {
+                $0.width.height.equalTo(24)
+                $0.top.equalTo(titleLabel)
+                $0.trailing.equalToSuperview().inset(40)
+            }
+            accountLabel.snp.makeConstraints {
+                $0.top.equalTo(titleLabel.snp.bottom).offset(35)
+                $0.leading.equalToSuperview().inset(40)
+            }
+            blueLineView.snp.makeConstraints {
+                $0.trailing.equalTo(accountLabel.snp.leading).offset(-8)
+                $0.top.equalTo(accountLabel)
+                $0.width.equalTo(3)
+                $0.height.equalTo(41)
+            }
+            accountNumberLabel.snp.makeConstraints {
+                $0.top.equalTo(accountLabel.snp.bottom).offset(5)
+                $0.leading.equalToSuperview().inset(40)
+            }
+            accountDivView.snp.makeConstraints {
+                $0.top.equalTo(accountNumberLabel.snp.bottom).offset(25)
+                $0.centerX.equalToSuperview()
+                $0.width.equalTo(329)
+                $0.height.equalTo(1)
+            }
+            durationLabel.snp.makeConstraints {
+                $0.top.equalTo(accountDivView.snp.bottom).offset(17)
+                $0.leading.equalToSuperview().inset(40)
+            }
+            durationInfoLabel.snp.makeConstraints {
+                $0.centerY.equalTo(durationLabel)
+                $0.trailing.equalToSuperview().inset(40)
+            }
+            newDateLabel.snp.makeConstraints {
+                $0.top.equalTo(durationLabel.snp.bottom).offset(11)
+                $0.leading.equalToSuperview().inset(40)
+            }
+            newDateInfoLabel.snp.makeConstraints {
+                $0.centerY.equalTo(newDateLabel)
+                $0.trailing.equalToSuperview().inset(40)
+            }
+            endDateLabel.snp.makeConstraints {
+                $0.top.equalTo(newDateLabel.snp.bottom).offset(11)
+                $0.leading.equalToSuperview().inset(40)
+            }
+            endDateInfoLabel.snp.makeConstraints {
+                $0.centerY.equalTo(endDateLabel)
+                $0.trailing.equalToSuperview().inset(40)
+            }
+            accountDivView2.snp.makeConstraints {
+                $0.top.equalTo(endDateLabel.snp.bottom).offset(25)
+                $0.centerX.equalToSuperview()
+                $0.width.equalTo(329)
+                $0.height.equalTo(1)
+            }
+            basicrateLabel.snp.makeConstraints {
+                $0.top.equalTo(accountDivView2.snp.bottom).offset(30)
+                $0.leading.equalToSuperview().inset(30)
+            }
+            rateinfoLabel.snp.makeConstraints {
+                $0.top.equalTo(basicrateLabel.snp.bottom).offset(15)
+                $0.leading.equalToSuperview().inset(30)
+            }
+            rateTableHeaderStack.snp.makeConstraints {
+                $0.top.equalTo(rateinfoLabel.snp.bottom).offset(10)
+                $0.leading.trailing.equalToSuperview().inset(30)
+                $0.height.equalTo(44)
+            }
+            rateTableValueStack.snp.makeConstraints {
+                $0.top.equalTo(rateTableHeaderStack.snp.bottom)
+                $0.leading.trailing.equalTo(rateTableHeaderStack)
+                $0.height.equalTo(44)
+            }
+            preferLabel.snp.makeConstraints {
+                $0.top.equalTo(rateTableValueStack.snp.bottom).offset(20)
+                $0.leading.equalToSuperview().inset(30)
+            }
+            
+            interestRateCollectionView.snp.makeConstraints {
+                $0.top.equalTo(rateTableValueStack.snp.bottom).offset(30)
+                $0.leading.trailing.equalToSuperview()
+                $0.height.equalTo(260)
+            }
+            cautionLabel.snp.makeConstraints {
+                $0.top.equalTo(interestRateCollectionView.snp.bottom).offset(30)
+                $0.leading.trailing.equalToSuperview().inset(40)
+            }
+            caution2Label.snp.makeConstraints {
+                $0.top.equalTo(cautionLabel.snp.bottom).offset(15)
+                $0.leading.trailing.equalToSuperview().inset(40)
+                $0.bottom.equalToSuperview().inset(40)
+            }
+
+            // 🔥 마지막에 contentView 높이 마무리 제약 추가 (스크롤 가능하게 하는 핵심!)
+            contentView.snp.makeConstraints {
+                $0.bottom.equalTo(caution2Label.snp.bottom).offset(40)
+            }
         }
     
-        caution2Label.snp.makeConstraints {
-            $0.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(20)
-            $0.leading.equalToSuperview().inset(40)
-            $0.trailing.equalToSuperview().inset(40)
-        }
-        rateTableHeaderStack.snp.makeConstraints {
-            $0.top.equalTo(rateinfoLabel.snp.bottom).offset(10)
-            $0.leading.trailing.equalToSuperview().inset(30)
-            $0.height.equalTo(44)
-        }
-                
-        rateTableValueStack.snp.makeConstraints {
-            $0.top.equalTo(rateTableHeaderStack.snp.bottom)
-            $0.leading.trailing.equalTo(rateTableHeaderStack)
-            $0.height.equalTo(44)
-        }
-        
-    }
-
     
     private let titleLabel = UILabel().then{
         $0.text = "계좌이율보기"

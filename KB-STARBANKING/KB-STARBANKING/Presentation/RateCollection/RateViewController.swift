@@ -45,6 +45,22 @@ class RateViewController: UIViewController {
         setDelegate()
     }
     
+    func createCollectionView() -> UICollectionView {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 12
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(RateViewCell.self, forCellWithReuseIdentifier: RateViewCell.identifier)
+        
+        return collectionView
+    }
+    
+    
     private func setLayout() {
 
         [preferLabel,collectionView].forEach {
@@ -57,7 +73,7 @@ class RateViewController: UIViewController {
         }
         
         collectionView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(10)
             $0.top.equalTo(preferLabel.snp.bottom).offset(15)
             $0.height.equalTo(cellHeight)
         }
