@@ -13,6 +13,7 @@ class TotalAccountViewController: UIViewController {
     
     private let totalAccountHeaderView = TotalAccountHeaderView()
     private let addBankView: AddBankView = AddBankView()
+    private let depositHeader = SectionHeaderView(title: "예금 · 적금", backgroundColor: .blue2, isDeposit: true)
     
     // MARK: - Life Cycle
     
@@ -33,16 +34,16 @@ class TotalAccountViewController: UIViewController {
     private func setUI() {
         view.addSubviews(
             totalAccountHeaderView,
-            addBankView
+            addBankView,
+            depositHeader
         )
         // 계좌셀 AccountCell
-        // 보험공제, 퇴직연금 ExtraAccountView
         // 사업자계좌 조회 바로가기 BusinessAccountView
     }
     
     private func setLayout() {
         totalAccountHeaderView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(44)
             $0.horizontalEdges.equalToSuperview().inset(19)
             $0.height.equalTo(48)
         }
@@ -51,6 +52,12 @@ class TotalAccountViewController: UIViewController {
             $0.top.equalTo(totalAccountHeaderView.snp.bottom).offset(18)
             $0.horizontalEdges.equalToSuperview().inset(20)
             $0.height.equalTo(24)
+        }
+        
+        depositHeader.snp.makeConstraints {
+            $0.top.equalTo(addBankView.snp.bottom).offset(23)
+            $0.leading.equalToSuperview().offset(15)
+            $0.height.equalTo(44)
         }
     }
 }
