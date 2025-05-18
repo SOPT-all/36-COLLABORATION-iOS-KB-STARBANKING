@@ -48,6 +48,7 @@ final class SectionHeaderView: UIView {
             moneyLabel.isHidden = false
             wonLabel.isHidden = false
         } else {
+            SectionLabel.textColor = .gray6
             moneyLabel.isHidden = true
             wonLabel.isHidden = true
         }
