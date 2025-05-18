@@ -80,6 +80,7 @@ class TotalAccountViewController: UIViewController {
         depositHeader.snp.makeConstraints {
             $0.top.equalTo(addBankView.snp.bottom).offset(23)
             $0.leading.equalToSuperview().offset(15)
+            $0.trailing.equalToSuperview()
             $0.height.equalTo(44)
         }
         
