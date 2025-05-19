@@ -128,7 +128,7 @@ class RateViewCell: UICollectionViewCell {
         
         goButton.snp.makeConstraints {
             $0.top.equalTo(periodLabel.snp.bottom).offset(18)
-            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.leading.trailing.equalToSuperview().inset(12)
             $0.height.equalTo(31)
         }
         
