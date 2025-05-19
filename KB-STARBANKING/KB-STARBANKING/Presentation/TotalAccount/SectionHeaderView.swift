@@ -14,7 +14,7 @@ final class SectionHeaderView: UIView {
     
     // MARK: - Properties
     
-    private let SectionLabel = UILabel().then {
+    private let sectionLabel = UILabel().then {
         $0.font = .font(.body2_15_semibold)
         $0.textColor = .kbBlack
     }
@@ -40,7 +40,7 @@ final class SectionHeaderView: UIView {
     init(title: String, backgroundColor: UIColor, isDeposit: Bool) {
         super.init(frame: .zero)
         
-        SectionLabel.text = title
+        sectionLabel.text = title
         self.backgroundColor = backgroundColor
         
         if isDeposit {
@@ -48,7 +48,7 @@ final class SectionHeaderView: UIView {
             moneyLabel.isHidden = false
             wonLabel.isHidden = false
         } else {
-            SectionLabel.textColor = .gray6
+            sectionLabel.textColor = .gray6
             moneyLabel.isHidden = true
             wonLabel.isHidden = true
         }
@@ -65,7 +65,7 @@ final class SectionHeaderView: UIView {
     
     private func setUI() {
         addSubviews(
-            SectionLabel,
+            sectionLabel,
             moneyLabel,
             wonLabel,
             arrowUpButton
@@ -80,13 +80,13 @@ final class SectionHeaderView: UIView {
     }
     
     private func setLayout() {
-        SectionLabel.snp.makeConstraints {
+        sectionLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(15)
             $0.centerY.equalToSuperview()
         }
         
         moneyLabel.snp.makeConstraints {
-            $0.leading.equalTo(SectionLabel.snp.trailing).offset(155)
+            $0.leading.equalTo(sectionLabel.snp.trailing).offset(155)
             $0.centerY.equalToSuperview()
         }
         
