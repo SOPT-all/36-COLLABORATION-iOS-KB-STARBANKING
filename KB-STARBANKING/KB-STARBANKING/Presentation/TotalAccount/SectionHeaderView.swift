@@ -40,6 +40,25 @@ final class SectionHeaderView: UIView {
     init(title: String, backgroundColor: UIColor, isDeposit: Bool) {
         super.init(frame: .zero)
         
+        setUI(title: title, backgroundColor: backgroundColor, isDeposit: isDeposit)
+        setLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - UI Setting
+    
+    private func setUI(title: String, backgroundColor: UIColor, isDeposit: Bool) {
+        addSubviews(
+            sectionLabel,
+            moneyLabel,
+            wonLabel,
+            arrowUpButton
+        )
+        
+        // 조건에 따른 UI 설정
         sectionLabel.text = title
         self.backgroundColor = backgroundColor
         
@@ -53,24 +72,7 @@ final class SectionHeaderView: UIView {
             wonLabel.isHidden = true
         }
         
-        setUI()
-        setLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - UI Setting
-    
-    private func setUI() {
-        addSubviews(
-            sectionLabel,
-            moneyLabel,
-            wonLabel,
-            arrowUpButton
-        )
-        
+        // 왼쪽 상하단에만 모서리 둥글기 적용
         layer.cornerRadius = 4
         layer.maskedCorners = [
             .layerMinXMinYCorner,
