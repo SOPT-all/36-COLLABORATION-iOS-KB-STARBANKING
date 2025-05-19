@@ -20,6 +20,7 @@ class TotalAccountViewController: UIViewController {
     private let accountView = AccountViewController()
     private let insuranceHeader = SectionHeaderView(title: "보험 · 공제", backgroundColor: .gray3, isDeposit: false)
     private let retirementHeader = SectionHeaderView(title: "퇴직연금", backgroundColor: .gray3, isDeposit: false)
+    private let businessAccountView = BusinessAccountView()
     
     // MARK: - Life Cycle
     
@@ -48,9 +49,9 @@ class TotalAccountViewController: UIViewController {
             depositHeader,
             accountView.view,
             insuranceHeader,
-            retirementHeader
+            retirementHeader,
+            businessAccountView
         )
-        // 사업자계좌 조회 바로가기 BusinessAccountView
     }
     
     private func setLayout() {
@@ -102,6 +103,13 @@ class TotalAccountViewController: UIViewController {
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview()
             $0.height.equalTo(44)
+        }
+        
+        businessAccountView.snp.makeConstraints {
+            $0.top.equalTo(retirementHeader.snp.bottom).offset(23)
+            $0.horizontalEdges.equalToSuperview().inset(20)
+            $0.height.equalTo(44)
+            $0.bottom.equalToSuperview().inset(20)
         }
     }
 }
