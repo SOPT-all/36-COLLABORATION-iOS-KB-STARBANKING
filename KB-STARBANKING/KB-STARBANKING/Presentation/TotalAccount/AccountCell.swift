@@ -183,8 +183,7 @@ final class AccountCell: UICollectionViewCell {
         
         depositButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(26)
-            $0.leading.trailing.equalToSuperview().inset(22.5)
-            $0.trailing.equalToSuperview().inset(18.5)
+            $0.leading.trailing.equalToSuperview().inset(19) 
             $0.height.equalTo(38)
         }
     }
