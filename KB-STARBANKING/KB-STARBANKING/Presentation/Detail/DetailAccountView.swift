@@ -1,0 +1,134 @@
+//
+//  DetailAccountView.swift
+//  KB-STARBANKING
+//
+//  Created by 신혜연 on 5/20/25.
+//
+
+import UIKit
+
+import SnapKit
+import Then
+
+final class DetailAccountView: UIView {
+    
+    // MARK: - Properties
+    private let titleLabel = UILabel().then {
+        $0.text = "계좌상세정보"
+        $0.textColor = .kbBlack
+        $0.font = .font(.body1_16_light)
+    }
+    
+    private let closeButton = UIButton().then {
+        $0.contentMode = .scaleAspectFit
+        $0.setImage(UIImage(named: "ic_close"), for: .normal)
+    }
+    
+    private let infoStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = 12
+        $0.alignment = .fill
+        $0.distribution = .fillEqually
+    }
+    
+    private let seperatorView = UIView().then {
+        $0.backgroundColor = .kbBlack
+        $0.alpha = 0.1
+    }
+    
+    // MARK: - Life Cycle
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setUI()
+        setLayout()
+        setInfoRows()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - UI Setting
+    
+    private func setUI() {
+        addSubviews(
+            titleLabel,
+            closeButton,
+            infoStackView,
+            seperatorView
+        )
+    }
+    
+    private func setLayout() {
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(safeAreaLayoutGuide)
+            $0.leading.equalToSuperview().offset(19)
+        }
+        
+        closeButton.snp.makeConstraints {
+            $0.top.equalTo(titleLabel)
+            $0.trailing.equalToSuperview().inset(19)
+            $0.size.equalTo(24)
+        }
+        
+        infoStackView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(31)
+            $0.horizontalEdges.equalToSuperview().inset(23)
+        }
+        
+        seperatorView.snp.makeConstraints {
+            $0.top.equalTo(infoStackView.snp.bottom).offset(19)
+            $0.horizontalEdges.equalToSuperview().inset(23)
+            $0.height.equalTo(1)
+        }
+        
+    }
+    
+    private func setInfoRows() {
+        let infoData = [
+            ("납입회차", "1"),
+            ("계좌상태", "정상"),
+            ("최종거래일", "2025.04.25"),
+            ("계약기간", "12")
+        ]
+        
+        infoData.forEach { title, value in
+            let row = createInfoRow(title: title, value: value)
+            infoStackView.addArrangedSubview(row)
+        }
+    }
+    
+    private func createInfoRow(title: String, value: String) -> UIView {
+        let container = UIView()
+
+        let infoLabel = UILabel().then {
+            $0.text = title
+            $0.textColor = .kbBlack
+            $0.font = .font(.body1_16_light)
+        }
+        
+        let valueLabel = UILabel().then {
+            $0.text = value
+            $0.textColor = .kbBlack
+            $0.font = .font(.body1_16_light)
+            $0.textAlignment = .right
+        }
+        
+        container.addSubviews(
+            infoLabel,
+            valueLabel
+        )
+        
+        infoLabel.snp.makeConstraints {
+            $0.top.leading.bottom.equalToSuperview()
+        }
+        
+        valueLabel.snp.makeConstraints {
+            $0.top.trailing.bottom.equalToSuperview()
+        }
+        
+        return container
+    }
+}
