@@ -35,6 +35,7 @@ class DetailViewController: UIViewController {
     private func setStyle() {
         view.backgroundColor = .kbWhite
         scrollView.showsVerticalScrollIndicator = false
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     private func setUI() {

@@ -63,7 +63,7 @@ final class DetailAccountView: UIView {
     
     private func setLayout() {
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview()
+            $0.top.equalToSuperview().offset(13)
             $0.leading.equalToSuperview().offset(19)
         }
         
