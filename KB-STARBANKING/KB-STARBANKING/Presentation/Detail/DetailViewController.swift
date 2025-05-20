@@ -13,8 +13,12 @@ class DetailViewController: UIViewController {
 
     // MARK: - Properties
     
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
+    
     private let detailAccountView = DetailAccountView()
     private let detailInfoView = DetailInfoView()
+    private let manageAccountView = ManageAccountView()
     
     // MARK: - Life Cycle
     
@@ -30,26 +34,47 @@ class DetailViewController: UIViewController {
     
     private func setStyle() {
         view.backgroundColor = .kbWhite
+        scrollView.showsVerticalScrollIndicator = false
     }
     
     private func setUI() {
-        view.addSubviews(
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        
+        contentView.addSubviews(
             detailAccountView,
-            detailInfoView
+            detailInfoView,
+            manageAccountView
         )
-        // 관리하기 ManageAccountView
     }
     
     private func setLayout() {
+        scrollView.snp.makeConstraints {
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        contentView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.width.equalToSuperview()
+        }
+        
         detailAccountView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview()
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(196)
+            $0.height.equalTo(185)
         }
         
         detailInfoView.snp.makeConstraints {
             $0.top.equalTo(detailAccountView.snp.bottom).offset(24)
             $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(171)
+        }
+        
+        manageAccountView.snp.makeConstraints {
+            $0.top.equalTo(detailInfoView.snp.bottom).offset(31)
+            $0.horizontalEdges.equalToSuperview().inset(23)
+            $0.height.equalTo(400)
+            $0.bottom.equalToSuperview().inset(20)
         }
     }
 }
