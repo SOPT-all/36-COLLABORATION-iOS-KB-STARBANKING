@@ -25,11 +25,16 @@ class InterestRateViewController: UIViewController {
         setupScrollView()
         setLayout()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
 
     private func setupScrollView() {
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.edges.equalToSuperview()
         }
 
         scrollView.addSubview(contentView)
@@ -55,7 +60,7 @@ class InterestRateViewController: UIViewController {
         }
 
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(10)
+            $0.top.equalToSuperview().inset(11)
             $0.leading.equalToSuperview().inset(19)
         }
         cancelButton.snp.makeConstraints {
@@ -64,7 +69,7 @@ class InterestRateViewController: UIViewController {
             $0.trailing.equalToSuperview().inset(19)
         }
         accountLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(35)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(25)
             $0.leading.equalToSuperview().inset(40)
         }
         blueLineView.snp.makeConstraints {
@@ -137,7 +142,7 @@ class InterestRateViewController: UIViewController {
         }
 
         interestRateCollectionView.snp.makeConstraints {
-            $0.top.equalTo(rateTableValueStack.snp.bottom).offset(55)
+            $0.top.equalTo(rateTableValueStack.snp.bottom).offset(60)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(260)
         }
