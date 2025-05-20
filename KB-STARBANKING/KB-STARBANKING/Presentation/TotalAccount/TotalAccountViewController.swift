@@ -57,14 +57,12 @@ class TotalAccountViewController: UIViewController {
     
     private func setLayout() {
         scrollView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
         
         contentView.snp.makeConstraints {
             $0.edges.equalToSuperview()
-            $0.width.equalTo(scrollView)
-            $0.height.greaterThanOrEqualToSuperview().priority(.low)
+            $0.width.equalToSuperview()
         }
         
         totalAccountHeaderView.snp.makeConstraints {
