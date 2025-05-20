@@ -48,7 +48,7 @@ final class DetailInfoView: UIView {
     
     private func setLayout() {
         itemStackView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.horizontalEdges.equalToSuperview()
         }
         
         dividerView.snp.makeConstraints {
@@ -62,8 +62,8 @@ final class DetailInfoView: UIView {
         let infos = ["과세 정보", "대출정보 목록"]
         
         infos.forEach { info in
-            let itemView = makeItemView(info: info)
-            itemStackView.addArrangedSubview(itemView)
+            let infoView = makeItemView(info: info)
+            itemStackView.addArrangedSubview(infoView)
         }
     }
     
@@ -86,7 +86,11 @@ final class DetailInfoView: UIView {
             $0.alpha = 0.1
         }
         
-        container.addSubviews(texInfoLabel, arrowDownButton, seperatorView)
+        container.addSubviews(
+            texInfoLabel,
+            arrowDownButton,
+            seperatorView
+        )
         
         texInfoLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(22)
