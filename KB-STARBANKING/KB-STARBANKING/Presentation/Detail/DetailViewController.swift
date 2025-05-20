@@ -12,7 +12,9 @@ import SnapKit
 class DetailViewController: UIViewController {
 
     // MARK: - Properties
+    
     private let detailAccountView = DetailAccountView()
+    private let detailInfoView = DetailInfoView()
     
     // MARK: - Life Cycle
     
@@ -32,15 +34,21 @@ class DetailViewController: UIViewController {
     
     private func setUI() {
         view.addSubviews(
-            detailAccountView
+            detailAccountView,
+            detailInfoView
         )
-        // 정보목록 DetailInfoView
         // 관리하기 ManageAccountView
     }
     
     private func setLayout() {
         detailAccountView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(196)
+        }
+        
+        detailInfoView.snp.makeConstraints {
+            $0.top.equalTo(detailAccountView.snp.bottom).offset(24)
             $0.horizontalEdges.equalToSuperview()
         }
     }
