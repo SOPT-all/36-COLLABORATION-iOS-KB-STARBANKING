@@ -51,7 +51,7 @@ class NavigationView: UIView {
     }
     
     private func setStyle(){
-        self.backgroundColor = .color(.kbWhite)
+        self.backgroundColor = .kbWhite
     }
     
     private func setUI() {

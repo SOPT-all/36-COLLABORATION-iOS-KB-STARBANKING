@@ -15,7 +15,7 @@ class PrimeRate: UIView {
         let label = UILabel()
         label.text = "현재 적용 중인 우대금리는\n연 6.00%에요"
         label.font = .font(.subtitle1_18_light)
-        label.textColor = .color(.kbBlack)
+        label.textColor = .kbBlack
         label.numberOfLines = 2
         return label
     }()
@@ -24,7 +24,7 @@ class PrimeRate: UIView {
         let label = UILabel()
         label.text = "25년 10월 23일까지 123,900원 모을 수 있어요.\n해당 상품의 최고 적용금리는 연 8.00%입니다."
         label.font = .font(.body3_14_light)
-        label.textColor = .color(.gray6)
+        label.textColor = .gray6
         label.numberOfLines = 2
         return label
     }()
@@ -41,13 +41,13 @@ class PrimeRate: UIView {
         let label = UILabel()
         label.text = "1회차"
         label.font = .font(.body2_15_semibold)
-        label.textColor = .color(.kbBlack)
+        label.textColor = .kbBlack
         return label
     }()
     
     private let firstDividerView: UIView = {
         let view = UIView()
-        view.layer.borderColor = UIColor.color(.gray5).cgColor
+        view.layer.borderColor = UIColor.gray5.cgColor
         view.layer.borderWidth = 1
         return view
     }()
@@ -55,14 +55,14 @@ class PrimeRate: UIView {
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.text = "2025.04월분"
-        label.textColor = .color(.gray6)
+        label.textColor = .gray6
         label.font = .font(.body3_14_medium)
         return label
     }()
     
     private let paymentBottomView: UIView = {
         let view = UIView()
-        view.backgroundColor = .color(.gray1)
+        view.backgroundColor = .gray1
         view.layer.cornerRadius = 10
         view.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         return view
@@ -79,14 +79,14 @@ class PrimeRate: UIView {
     private let placeLabel: UILabel = {
         let label = UILabel()
         label.text = "돈암동"
-        label.textColor = .color(.gray6)
+        label.textColor = .gray6
         label.font = .font(.body3_14_light)
         return label
     }()
     
     private let secondDividerView: UIView = {
         let view = UIView()
-        view.layer.borderColor = UIColor.color(.gray5).cgColor
+        view.layer.borderColor = UIColor.gray5.cgColor
         view.layer.borderWidth = 1
         return view
     }()
@@ -103,7 +103,7 @@ class PrimeRate: UIView {
         let label = UILabel()
         label.text = "*놓치고 있는 금리가 있어요!"
         label.font = .font(.body3_14_medium)
-        label.textColor = .color(.kbBlack)
+        label.textColor = .kbBlack
         return label
     }()
     
@@ -117,7 +117,7 @@ class PrimeRate: UIView {
         let label = UILabel()
         label.text = "*최고 적용금리 8.00% = 기본금리 2.50% + 퀴즈 풀이 시 5.50%p"
         label.font = .font(.caption2_12_light)
-        label.textColor = .color(.gray6)
+        label.textColor = .gray6
         return label
     }()
     
@@ -135,7 +135,7 @@ class PrimeRate: UIView {
     }
     
     private func setStyle(){
-        self.backgroundColor = .color(.kbWhite)
+        self.backgroundColor = .kbWhite
     }
     
     private func setUI() {
@@ -255,12 +255,12 @@ class PrimeRate: UIView {
             let titleLabel = UILabel()
             titleLabel.text = title
             titleLabel.font = .font(.body2_15_light)
-            titleLabel.textColor = .color(.gray6)
+            titleLabel.textColor = .gray6
             
             let valueLabel = UILabel()
             valueLabel.text = value
             valueLabel.font = .font(.body2_15_regular)
-            valueLabel.textColor = .color(.kbBlack)
+            valueLabel.textColor = .kbBlack
             valueLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
             
             hStack.addArrangedSubview(titleLabel)
@@ -269,5 +269,4 @@ class PrimeRate: UIView {
             paymentStackView.addArrangedSubview(hStack)
         }
     }
-    
 }

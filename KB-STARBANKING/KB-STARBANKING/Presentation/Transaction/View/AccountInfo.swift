@@ -15,7 +15,7 @@ class AccountInfo: UIView {
         let label = UILabel()
         label.text = "KB내맘대로적금"
         label.font = .font(.body1_16_light)
-        label.textColor = .color(.kbBlack)
+        label.textColor = .kbBlack
         return label
     }()
     
@@ -29,7 +29,7 @@ class AccountInfo: UIView {
         let label = UILabel()
         label.text = "016703-04-425292"
         label.font = .font(.title2_18_semibold)
-        label.textColor = .color(.kbBlack)
+        label.textColor = .kbBlack
         return label
     }()
     
@@ -55,7 +55,7 @@ class AccountInfo: UIView {
         label.text = "D-183"
         label.font = .font(.caption3_11_medium)
         label.textAlignment = .center
-        label.backgroundColor = .color(.gray8)
+        label.backgroundColor = .gray8
         label.textColor = .kbWhite
         label.clipsToBounds = true
         label.layer.cornerRadius = 11
@@ -64,10 +64,10 @@ class AccountInfo: UIView {
     
     private let expirationDateProgressView: UIProgressView = {
         let progressView = UIProgressView()
-        progressView.progressTintColor = .color(.yellow3)
-        progressView.trackTintColor = .color(.gray1)
+        progressView.progressTintColor = .yellow3
+        progressView.trackTintColor = .gray1
         progressView.progress = 0.3
-        progressView.layer.borderColor = UIColor.color(.gray4).cgColor
+        progressView.layer.borderColor = UIColor.gray4.cgColor
         progressView.layer.cornerRadius = 5
         progressView.layer.borderWidth = 1
         progressView.clipsToBounds = true
@@ -78,7 +78,7 @@ class AccountInfo: UIView {
         let label = UILabel()
         label.text = "신규일 2025.04.23"
         label.font = .font(.caption2_12_light)
-        label.textColor = .color(.gray6)
+        label.textColor = .gray6
         return label
     }()
     
@@ -86,16 +86,16 @@ class AccountInfo: UIView {
         let label = UILabel()
         label.text = "만기일 2025.10.23"
         label.font = .font(.caption2_12_light)
-        label.textColor = .color(.gray6)
+        label.textColor = .gray6
         return label
     }()
     
     private let depositButton: UIButton = {
         let button = UIButton()
         button.setTitle("입금", for: .normal)
-        button.setTitleColor(.color(.kbBlack), for: .normal)
+        button.setTitleColor(.kbBlack, for: .normal)
         button.titleLabel?.font = .font(.body3_14_light)
-        button.backgroundColor = .color(.gray3)
+        button.backgroundColor = .gray3
         button.layer.cornerRadius = 2
         button.clipsToBounds = true
         return button
@@ -104,9 +104,9 @@ class AccountInfo: UIView {
     private let expectClosingButton: UIButton = {
         let button = UIButton()
         button.setTitle("해지예상조회", for: .normal)
-        button.setTitleColor(.color(.kbBlack), for: .normal)
+        button.setTitleColor(.kbBlack, for: .normal)
         button.titleLabel?.font = .font(.body3_14_light)
-        button.backgroundColor = .color(.gray3)
+        button.backgroundColor = .gray3
         button.layer.cornerRadius = 2
         button.clipsToBounds = true
         return button
@@ -125,7 +125,7 @@ class AccountInfo: UIView {
     }
     
     private func setStyle(){
-        self.backgroundColor = .color(.kbWhite)
+        self.backgroundColor = .kbWhite
     }
     
     private func setUI() {
@@ -197,6 +197,7 @@ class AccountInfo: UIView {
         }
         
         depositButton.snp.makeConstraints {
+            $0.top.equalTo(expirationDateLabel.snp.bottom).offset(30)
             $0.top.equalTo(expirationDateLabel.snp.bottom).offset(30)
             $0.leading.equalToSuperview().offset(20)
             $0.width.equalTo(164)
