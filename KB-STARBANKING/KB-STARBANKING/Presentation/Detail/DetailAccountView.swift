@@ -63,12 +63,12 @@ final class DetailAccountView: UIView {
     
     private func setLayout() {
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide)
+            $0.top.equalToSuperview()
             $0.leading.equalToSuperview().offset(19)
         }
         
         closeButton.snp.makeConstraints {
-            $0.top.equalTo(titleLabel)
+            $0.centerY.equalTo(titleLabel)
             $0.trailing.equalToSuperview().inset(19)
             $0.size.equalTo(24)
         }
