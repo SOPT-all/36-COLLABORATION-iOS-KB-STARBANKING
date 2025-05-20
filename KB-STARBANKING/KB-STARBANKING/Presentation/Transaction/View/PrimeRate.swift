@@ -258,10 +258,17 @@ class PrimeRate: UIView {
             titleLabel.textColor = .gray6
             
             let valueLabel = UILabel()
-            valueLabel.text = value
             valueLabel.font = .font(.body2_15_regular)
-            valueLabel.textColor = .kbBlack
             valueLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+            
+            if title == "납입금액", let range = value.range(of: "10,000") {
+                let attributed = NSMutableAttributedString(string: value)
+                attributed.addAttribute(.foregroundColor, value: UIColor.blue1, range: NSRange(range, in: value))
+                valueLabel.attributedText = attributed
+            } else {
+                valueLabel.text = value
+                valueLabel.textColor = .kbBlack
+            }
             
             hStack.addArrangedSubview(titleLabel)
             hStack.addArrangedSubview(valueLabel)
