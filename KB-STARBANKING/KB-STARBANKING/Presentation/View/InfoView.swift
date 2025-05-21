@@ -1,0 +1,179 @@
+//
+//  AccountInfoView.swift
+//  KB-STARBANKING
+//
+//  Created by hyunwoo on 5/21/25.
+//
+import UIKit
+
+import SnapKit
+import Then
+
+class InfoView: UIView {
+    
+    private let titleLabel = UILabel().then {
+        $0.text = "계좌이율보기"
+        $0.font = .font(.body1_16_light)
+        $0.textColor = .kbBlack
+    }
+
+    private let accountLabel = UILabel().then {
+        $0.text = "KB내맘대로적금"
+        $0.font = .font(.body2_15_light)
+        $0.textColor = .kbBlack
+    }
+
+    private let blueLineView = UIView().then {
+        $0.backgroundColor = .blue3
+    }
+
+    private let cancelButton = UIButton().then {
+        let image = UIImage(named: "ic_close")
+        $0.setImage(image, for: .normal)
+        $0.imageView?.contentMode = .scaleAspectFit
+    }
+
+    private let accountNumberLabel = UILabel().then {
+        $0.text = "016703-04-425292"
+        $0.font = .font(.title2_18_semibold)
+        $0.textColor = .kbBlack
+    }
+
+    private let accountDivView = UIView().then {
+        $0.backgroundColor = .kbBlack
+        $0.alpha = 0.1
+    }
+
+    private let durationLabel = UILabel().then {
+        $0.text = "계약기간"
+        $0.font = .font(.body1_16_light)
+        $0.alpha = 0.6
+        $0.textColor = .kbBlack
+    }
+
+    private let durationInfoLabel = UILabel().then {
+        $0.text = "12 개월"
+        $0.font = .font(.body1_16_light)
+        $0.alpha = 0.8
+        $0.textColor = .kbBlack
+    }
+
+    private let newDateLabel = UILabel().then {
+        $0.text = "신규일"
+        $0.font = .font(.body1_16_light)
+        $0.alpha = 0.6
+        $0.textColor = .kbBlack
+    }
+
+    private let newDateInfoLabel = UILabel().then {
+        $0.text = "2025.10.23"
+        $0.font = .font(.body1_16_light)
+        $0.alpha = 0.8
+        $0.textColor = UIColor(named: "KBBlack")
+    }
+
+    private let endDateLabel = UILabel().then {
+        $0.text = "만기일"
+        $0.font = .font(.body1_16_light)
+        $0.alpha = 0.6
+        $0.textColor = .kbBlack
+    }
+
+    private let endDateInfoLabel = UILabel().then {
+        $0.text = "2025.10.23"
+        $0.font = .font(.body1_16_light)
+        $0.alpha = 0.8
+        $0.textColor = .kbBlack
+    }
+
+    private let accountDivView2 = UIView().then {
+        $0.backgroundColor = .kbBlack
+        $0.alpha = 0.1
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+        setupLayout()
+    }
+    
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    
+    private func setupUI() {
+        addSubviews(titleLabel,accountLabel,cancelButton,blueLineView, accountNumberLabel, accountDivView,durationLabel, durationInfoLabel,newDateLabel, newDateInfoLabel,
+            endDateLabel, endDateInfoLabel,accountDivView2)
+    }
+    
+    private func setupLayout() {
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.leading.equalToSuperview().inset(20)
+        }
+        
+        accountLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(25)
+            $0.leading.equalToSuperview().inset(40)
+        }
+        
+        accountNumberLabel.snp.makeConstraints {
+            $0.top.equalTo(accountLabel.snp.bottom).offset(5)
+            $0.leading.equalToSuperview().inset(40)
+        }
+        
+        cancelButton.snp.makeConstraints {
+            $0.width.height.equalTo(24)
+            $0.top.equalTo(titleLabel)
+            $0.trailing.equalToSuperview().inset(19)
+        }
+        
+        blueLineView.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(19)
+            $0.top.equalTo(accountLabel)
+            $0.width.equalTo(3)
+            $0.height.equalTo(41)
+        }
+        
+        accountDivView.snp.makeConstraints {
+            $0.top.equalTo(accountNumberLabel.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(1)
+        }
+        
+        durationLabel.snp.makeConstraints {
+            $0.top.equalTo(accountDivView.snp.bottom).offset(17)
+            $0.leading.equalToSuperview().inset(23)
+        }
+        
+        durationInfoLabel.snp.makeConstraints {
+            $0.centerY.equalTo(durationLabel)
+            $0.trailing.equalToSuperview().inset(23)
+        }
+        
+        newDateLabel.snp.makeConstraints {
+            $0.top.equalTo(durationLabel.snp.bottom).offset(11)
+            $0.leading.equalToSuperview().inset(23)
+        }
+        
+        newDateInfoLabel.snp.makeConstraints {
+            $0.centerY.equalTo(newDateLabel)
+            $0.trailing.equalToSuperview().inset(23)
+        }
+        
+        endDateLabel.snp.makeConstraints {
+            $0.top.equalTo(newDateLabel.snp.bottom).offset(11)
+            $0.leading.equalToSuperview().inset(23)
+        }
+        
+        endDateInfoLabel.snp.makeConstraints {
+            $0.centerY.equalTo(endDateLabel)
+            $0.trailing.equalToSuperview().inset(23)
+        }
+        
+        accountDivView2.snp.makeConstraints {
+            $0.top.equalTo(endDateLabel.snp.bottom).offset(16)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(329)
+            $0.height.equalTo(1)
+        }
+    }
+}

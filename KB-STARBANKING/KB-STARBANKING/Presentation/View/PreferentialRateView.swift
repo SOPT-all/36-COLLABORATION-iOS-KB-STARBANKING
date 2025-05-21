@@ -1,20 +1,17 @@
 //
-//  InterestRateViewController.swift
+//  PreferentialRateView.swift
 //  KB-STARBANKING
 //
-//  Created by hyunwoo on 5/14/25.
+//  Created by hyunwoo on 5/21/25.
 //
+
 import UIKit
 
 import SnapKit
 import Then
 
-class InterestRateViewController: UIViewController {
-    
-    private let scrollView = UIScrollView()
-    private let contentView = UIView()
-    private let accountView = InfoView()
-    private let primeView = BasicRateView()
+class PreferentialRateView: UIView {
+
     private lazy var interestRateCollectionView = RateViewController().createCollectionView()
     
     private let preferLabel = UILabel().then {
@@ -37,56 +34,30 @@ class InterestRateViewController: UIViewController {
         $0.numberOfLines = 2
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setStyle()
-        setupScrollView()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setUI()
         setLayout()
     }
-    
-    private func setStyle() {
-        view.backgroundColor = .white
-        scrollView.showsVerticalScrollIndicator = false
-        navigationController?.navigationBar.isHidden = true
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-    
-    private func setupScrollView() {
-        view.addSubview(scrollView)
-        scrollView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        scrollView.addSubview(contentView)
+
+    private func setUI() {
+        addSubviews(preferLabel, interestRateCollectionView, cautionLabel, caution2Label)
     }
-    
+
     private func setLayout() {
-        
-        contentView.addSubviews(accountView, primeView, preferLabel,interestRateCollectionView, cautionLabel, caution2Label)
-        
-        contentView.snp.makeConstraints {
-            $0.edges.width.equalToSuperview()
-        }
-        
-        accountView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(200)
-        }
-        
-        primeView.snp.makeConstraints {
-            $0.top.equalTo(accountView.snp.bottom).offset(46)
-            $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(157)
-        }
-        
         preferLabel.snp.makeConstraints {
-            $0.top.equalTo(primeView.snp.bottom).offset(46)
+            $0.top.equalToSuperview().offset(46)
             $0.leading.equalToSuperview().inset(23)
         }
 
         interestRateCollectionView.snp.makeConstraints {
             $0.top.equalTo(preferLabel.snp.bottom).offset(17)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(212)
+            $0.height.equalTo(260)
         }
         
         cautionLabel.snp.makeConstraints {
@@ -101,4 +72,3 @@ class InterestRateViewController: UIViewController {
         }
     }
 }
-
