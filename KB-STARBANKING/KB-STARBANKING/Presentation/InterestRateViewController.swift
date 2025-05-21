@@ -55,6 +55,7 @@ class InterestRateViewController: UIViewController {
         [termTitleLabel, rateTitleLabel].forEach {
             rateTableHeaderStack.addArrangedSubview($0)
         }
+        
         [termValueLabel, rateValueLabel].forEach {
             rateTableValueStack.addArrangedSubview($0)
         }
@@ -63,79 +64,96 @@ class InterestRateViewController: UIViewController {
             $0.top.equalToSuperview().inset(11)
             $0.leading.equalToSuperview().inset(19)
         }
+        
         cancelButton.snp.makeConstraints {
             $0.width.height.equalTo(24)
             $0.top.equalTo(titleLabel)
             $0.trailing.equalToSuperview().inset(19)
         }
+        
         accountLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(25)
             $0.leading.equalToSuperview().inset(40)
         }
+        
         blueLineView.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(19)
             $0.top.equalTo(accountLabel)
             $0.width.equalTo(3)
             $0.height.equalTo(41)
         }
+        
         accountNumberLabel.snp.makeConstraints {
             $0.top.equalTo(accountLabel.snp.bottom).offset(5)
             $0.leading.equalToSuperview().inset(40)
         }
+        
         accountDivView.snp.makeConstraints {
             $0.top.equalTo(accountNumberLabel.snp.bottom).offset(20)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(329)
             $0.height.equalTo(1)
         }
+        
         durationLabel.snp.makeConstraints {
             $0.top.equalTo(accountDivView.snp.bottom).offset(17)
             $0.leading.equalToSuperview().inset(23)
         }
+        
         durationInfoLabel.snp.makeConstraints {
             $0.centerY.equalTo(durationLabel)
             $0.trailing.equalToSuperview().inset(23)
         }
+        
         newDateLabel.snp.makeConstraints {
             $0.top.equalTo(durationLabel.snp.bottom).offset(11)
             $0.leading.equalToSuperview().inset(23)
         }
+        
         newDateInfoLabel.snp.makeConstraints {
             $0.centerY.equalTo(newDateLabel)
             $0.trailing.equalToSuperview().inset(23)
         }
+        
         endDateLabel.snp.makeConstraints {
             $0.top.equalTo(newDateLabel.snp.bottom).offset(11)
             $0.leading.equalToSuperview().inset(23)
         }
+        
         endDateInfoLabel.snp.makeConstraints {
             $0.centerY.equalTo(endDateLabel)
             $0.trailing.equalToSuperview().inset(23)
         }
+        
         accountDivView2.snp.makeConstraints {
             $0.top.equalTo(endDateLabel.snp.bottom).offset(16)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(329)
             $0.height.equalTo(1)
         }
+        
         basicrateLabel.snp.makeConstraints {
             $0.top.equalTo(accountDivView2.snp.bottom).offset(46)
             $0.leading.equalToSuperview().inset(23)
         }
+        
         rateinfoLabel.snp.makeConstraints {
             $0.top.equalTo(basicrateLabel.snp.bottom).offset(15)
             $0.leading.equalToSuperview().inset(23)
         }
+        
         rateTableHeaderStack.snp.makeConstraints {
             $0.top.equalTo(rateinfoLabel.snp.bottom).offset(10)
             $0.leading.trailing.equalToSuperview().inset(23)
             $0.height.equalTo(44)
         }
+        
         rateTableValueStack.snp.makeConstraints {
             $0.top.equalTo(rateTableHeaderStack.snp.bottom)
             $0.leading.trailing.equalTo(rateTableHeaderStack)
             $0.height.equalTo(44)
         }
+        
         preferLabel.snp.makeConstraints {
             $0.top.equalTo(rateTableValueStack.snp.bottom).offset(46)
             $0.leading.equalToSuperview().inset(23)
@@ -146,10 +164,12 @@ class InterestRateViewController: UIViewController {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(260)
         }
+        
         cautionLabel.snp.makeConstraints {
             $0.top.equalTo(interestRateCollectionView.snp.bottom).offset(22)
             $0.leading.trailing.equalToSuperview().inset(40)
         }
+        
         caution2Label.snp.makeConstraints {
             $0.top.equalTo(cautionLabel.snp.bottom).offset(15)
             $0.leading.trailing.equalToSuperview().inset(40)

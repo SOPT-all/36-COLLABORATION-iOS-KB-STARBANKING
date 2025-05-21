@@ -12,7 +12,6 @@ import Then
 
 class RateViewCell: UICollectionViewCell {
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.layer.cornerRadius = 11 
