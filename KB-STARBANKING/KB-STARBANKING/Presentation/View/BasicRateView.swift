@@ -1,0 +1,112 @@
+//
+//  BasicRateView.swift
+//  KB-STARBANKING
+//
+//  Created by hyunwoo on 5/21/25.
+//
+import UIKit
+
+import SnapKit
+import Then
+
+class BasicRateView: UIView {
+    private let basicrateLabel = UILabel().then {
+        $0.text = "기본이율"
+        $0.font = .font(.title2_18_semibold)
+        $0.textColor = .kbBlack
+    }
+
+    private let rateinfoLabel = UILabel().then {
+        $0.text = "(연이율, 세전, 단위: %)"
+        $0.font = .font(.caption1_13_light)
+        $0.textColor = .kbBlack
+        $0.alpha = 0.5
+    }
+
+    private let rateTableHeaderStack = UIStackView().then {
+        $0.axis = .horizontal
+        $0.distribution = .fillEqually
+        $0.alignment = .center
+        $0.backgroundColor = .gray1
+    }
+
+    private let rateTableValueStack = UIStackView().then {
+        $0.axis = .horizontal
+        $0.distribution = .fillEqually
+        $0.alignment = .center
+    }
+
+    private let termTitleLabel = UILabel().then {
+        $0.text = "적용기간"
+        $0.font = .font(.body3_14_light)
+        $0.textAlignment = .center
+        $0.alpha = 0.6
+        $0.textColor = .gray6
+    }
+
+    private let rateTitleLabel = UILabel().then {
+        $0.text = "기본이율"
+        $0.font = .font(.body3_14_light)
+        $0.textAlignment = .center
+        $0.alpha = 0.6
+        $0.textColor = .gray6
+    }
+
+    private let termValueLabel = UILabel().then {
+        $0.text = "2025.04.23~2025.10.22"
+        $0.font = .font(.body3_14_light)
+        $0.textAlignment = .center
+        $0.textColor = .kbBlack
+    }
+
+    private let rateValueLabel = UILabel().then {
+        $0.text = "2.3"
+        $0.font = .font(.body3_14_light)
+        $0.textAlignment = .center
+        $0.textColor = .kbBlack
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+        setupLayout()
+    }
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    
+    private func setupUI() {
+        addSubviews(basicrateLabel, rateinfoLabel, rateTableHeaderStack, rateTableValueStack)
+        
+        [termTitleLabel, rateTitleLabel].forEach {
+            rateTableHeaderStack.addArrangedSubview($0)
+        }
+        
+        [termValueLabel, rateValueLabel].forEach {
+            rateTableValueStack.addArrangedSubview($0)
+        }
+    }
+    
+    
+    private func setupLayout() {
+        basicrateLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(46)
+            $0.leading.equalToSuperview().inset(23)
+        }
+        
+        rateinfoLabel.snp.makeConstraints {
+            $0.top.equalTo(basicrateLabel.snp.bottom).offset(15)
+            $0.leading.equalToSuperview().inset(23)
+        }
+        
+        rateTableHeaderStack.snp.makeConstraints {
+            $0.top.equalTo(rateinfoLabel.snp.bottom).offset(10)
+            $0.leading.trailing.equalToSuperview().inset(23)
+            $0.height.equalTo(44)
+        }
+        
+        rateTableValueStack.snp.makeConstraints {
+            $0.top.equalTo(rateTableHeaderStack.snp.bottom)
+            $0.leading.trailing.equalTo(rateTableHeaderStack)
+            $0.height.equalTo(44)
+        }
+    }
+}
