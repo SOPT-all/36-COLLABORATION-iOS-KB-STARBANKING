@@ -82,13 +82,13 @@ class InfoView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setupUI()
-        setupLayout()
+        setUI()
+        setLayout()
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
-    private func setupUI() {
+    private func setUI() {
         addSubviews(
             accountLabel,
             blueLineView,
@@ -104,7 +104,7 @@ class InfoView: UIView {
         )
     }
     
-    private func setupLayout() {
+    private func setLayout() {
         accountLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(18)
             $0.leading.equalToSuperview().inset(40)
