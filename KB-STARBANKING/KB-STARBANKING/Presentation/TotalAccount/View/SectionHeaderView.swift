@@ -62,6 +62,19 @@ final class SectionHeaderView: UIView {
         sectionLabel.text = title
         self.backgroundColor = backgroundColor
         
+        // 예적금의 경우, moneyLabel 보이도록 설정
+        configureIsDeposit(isDeposit)
+        
+        // 왼쪽 상하단에만 모서리 둥글기 적용
+        layer.cornerRadius = 4
+        layer.maskedCorners = [
+            .layerMinXMinYCorner,
+            .layerMinXMaxYCorner
+        ]
+        clipsToBounds = true
+    }
+    
+    private func configureIsDeposit(_ isDeposit: Bool) {
         if isDeposit {
             moneyLabel.text = "10,000"
             moneyLabel.isHidden = false
@@ -71,14 +84,6 @@ final class SectionHeaderView: UIView {
             moneyLabel.isHidden = true
             wonLabel.isHidden = true
         }
-        
-        // 왼쪽 상하단에만 모서리 둥글기 적용
-        layer.cornerRadius = 4
-        layer.maskedCorners = [
-            .layerMinXMinYCorner,
-            .layerMinXMaxYCorner
-        ]
-        clipsToBounds = true
     }
     
     private func setLayout() {
