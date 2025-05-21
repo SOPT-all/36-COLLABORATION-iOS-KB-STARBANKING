@@ -16,7 +16,7 @@ final class BusinessAccountView: UIView {
     
     private let wonImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
-        $0.image = UIImage(named: "ic_won")
+        $0.image = .icWon
     }
     
     private let shortCutLabel = UILabel().then {
@@ -33,7 +33,7 @@ final class BusinessAccountView: UIView {
     
     private let arrowRightButton = UIButton().then {
         $0.contentMode = .scaleAspectFit
-        $0.setImage(UIImage(named: "ic_arrow_right"), for: .normal)
+        $0.setImage(.icArrowRight, for: .normal)
     }
     
     // MARK: - Life Cycle

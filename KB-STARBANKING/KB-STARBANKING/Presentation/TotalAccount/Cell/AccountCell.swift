@@ -27,7 +27,7 @@ final class AccountCell: UICollectionViewCell {
     }
     
     private let copyButton = UIButton().then {
-        $0.setImage(UIImage(named: "ic_copy"), for: .normal)
+        $0.setImage(.icCopy, for: .normal)
     }
     
     private let newLabel = UILabel().then {
@@ -67,7 +67,7 @@ final class AccountCell: UICollectionViewCell {
     }
     
     private let moreButton = UIButton().then {
-        $0.setImage(UIImage(named: "ic_menu_vert"), for: .normal)
+        $0.setImage(.icMenuVert, for: .normal)
     }
     
     private let depositButton = UIButton().then {

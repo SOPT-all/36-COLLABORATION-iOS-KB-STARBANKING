@@ -32,7 +32,7 @@ final class SectionHeaderView: UIView {
     
     private let arrowUpButton = UIButton().then {
         $0.contentMode = .scaleAspectFit
-        $0.setImage(UIImage(named: "ic_arrow_up"), for: .normal)
+        $0.setImage(.icArrowUp, for: .normal)
     }
     
     // MARK: - Life Cycle

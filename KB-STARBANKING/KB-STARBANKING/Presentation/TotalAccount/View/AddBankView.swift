@@ -16,7 +16,7 @@ final class AddBankView: UIView {
     
     private let plusButton = UIButton().then {
         $0.contentMode = .scaleAspectFit
-        $0.setImage(UIImage(named: "ic_plus"), for: .normal)
+        $0.setImage(.icPlus, for: .normal)
     }
     
     private let plusLabel = UILabel().then {
@@ -27,7 +27,7 @@ final class AddBankView: UIView {
     
     private let splitsButton = UIButton().then {
         $0.contentMode = .scaleAspectFit
-        $0.setImage(UIImage(named: "ic_splits"), for: .normal)
+        $0.setImage(.icSplits, for: .normal)
     }
     
     private let splitsLabel = UILabel().then {
@@ -38,7 +38,7 @@ final class AddBankView: UIView {
     
     private let scrollButton = UIButton().then {
         $0.contentMode = .scaleAspectFit
-        $0.setImage(UIImage(named: "ic_scroll"), for: .normal)
+        $0.setImage(.icScroll, for: .normal)
     }
     
     private let scrollLabel = UILabel().then {

@@ -16,7 +16,7 @@ final class TotalAccountHeaderView: UIView {
     
     private let backButton = UIButton().then {
         $0.contentMode = .scaleAspectFit
-        $0.setImage(UIImage(named: "ic_arrow_left"), for: .normal)
+        $0.setImage(.icArrowLeft, for: .normal)
     }
     
     private let titleLabel = UILabel().then {
@@ -27,12 +27,12 @@ final class TotalAccountHeaderView: UIView {
     
     private let homeButton = UIButton().then {
         $0.contentMode = .scaleAspectFit
-        $0.setImage(UIImage(named: "ic_home"), for: .normal)
+        $0.setImage(.icHome, for: .normal)
     }
     
     private let menuButton = UIButton().then {
         $0.contentMode = .scaleAspectFit
-        $0.setImage(UIImage(named: "ic_menu"), for: .normal)
+        $0.setImage(.icMenu, for: .normal)
     }
 
     // MARK: - Life Cycle
