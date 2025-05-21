@@ -80,7 +80,7 @@ class DetailViewController: UIViewController {
             $0.top.equalTo(detailInfoView.snp.bottom).offset(31)
             $0.horizontalEdges.equalToSuperview().inset(23)
             $0.height.equalTo(400)
-            $0.bottom.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview().inset(50)
         }
     }
 }

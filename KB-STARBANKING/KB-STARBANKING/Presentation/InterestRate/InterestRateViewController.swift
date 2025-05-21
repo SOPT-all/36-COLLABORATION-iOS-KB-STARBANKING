@@ -70,7 +70,7 @@ class InterestRateViewController: UIViewController {
             $0.top.equalTo(basicRateView.snp.bottom).offset(46)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(360)
-            $0.bottom.equalToSuperview().inset(40)
+            $0.bottom.equalToSuperview().inset(50)
         }
     }
 }
