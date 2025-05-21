@@ -20,8 +20,8 @@ class RateViewController: UIViewController {
     
     private let preferLabel = UILabel().then{
         $0.text = "우대이율"
-        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = UIColor(named: "KBBlack")
+        $0.font = .font(.title2_18_semibold)
+        $0.textColor = .kbBlack
     }
     
     private lazy var layout = UICollectionViewFlowLayout().then {

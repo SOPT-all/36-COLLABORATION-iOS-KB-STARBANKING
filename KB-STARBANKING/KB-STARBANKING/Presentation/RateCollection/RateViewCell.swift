@@ -29,14 +29,14 @@ class RateViewCell: UICollectionViewCell {
     private let imageView = UIImageView()
     
     private let nameLabel = UILabel().then {
-        $0.font = UIFont(name: "Pretendard-Medium", size: 14)
+        $0.font = .font(.body3_14_medium)
         $0.textColor = .kbBlack
         $0.numberOfLines = 2
         $0.lineBreakMode = .byWordWrapping
     }
     
     private let rateLabel = UILabel().then {
-        $0.font = UIFont(name: "Pretendard-Light", size: 13)
+        $0.font = .font(.caption1_13_light)
         $0.text = "우대이율"
         $0.textColor = .kbBlack
         $0.textAlignment = .left
@@ -44,13 +44,13 @@ class RateViewCell: UICollectionViewCell {
     }
     
     private let rateValueLabel = UILabel().then {
-        $0.font = UIFont(name: "Pretendard-Light", size: 13)
+        $0.font = .font(.caption1_13_light)
         $0.textAlignment = .right
         $0.textColor = .kbBlack
     }
     
     private let periodLabel = UILabel().then {
-        $0.font = UIFont(name: "Pretendard-Light", size: 13)
+        $0.font = .font(.caption1_13_light)
         $0.text = "기간"
         $0.textColor = .kbBlack
         $0.textAlignment = .left
@@ -58,14 +58,14 @@ class RateViewCell: UICollectionViewCell {
     }
     
     private let periodValueLabel = UILabel().then {
-        $0.font = UIFont(name: "Pretendard-Light", size: 13)
+        $0.font = .font(.caption1_13_light)
         $0.textAlignment = .right
         $0.textColor = .kbBlack
     }
     
     private let goButton = UIButton().then {
         $0.setTitle("보러가기", for: .normal)
-        $0.titleLabel?.font = UIFont(name: "Pretendard-Light", size: 13)
+        $0.titleLabel?.font = .font(.caption1_13_light)
         $0.backgroundColor = .kbWhite
         $0.setTitleColor(.kbBlack, for: .normal)
         $0.layer.cornerRadius = 4

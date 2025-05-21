@@ -183,18 +183,18 @@ class InterestRateViewController: UIViewController {
 
     private let titleLabel = UILabel().then {
         $0.text = "계좌이율보기"
-        $0.font = UIFont(name: "Pretendard-Light", size: 16)
-        $0.textColor = UIColor(named: "KBBlack")
+        $0.font = .font(.body1_16_light)
+        $0.textColor = .kbBlack
     }
 
     private let accountLabel = UILabel().then {
         $0.text = "KB내맘대로적금"
-        $0.font = UIFont(name: "Pretendard-Light", size: 15)
-        $0.textColor = UIColor(named: "KBBlack")
+        $0.font = .font(.body2_15_light)
+        $0.textColor = .kbBlack
     }
 
     private let blueLineView = UIView().then {
-        $0.backgroundColor = UIColor(named: "Blue3")
+        $0.backgroundColor = .blue3
     }
 
     private let cancelButton = UIButton().then {
@@ -205,72 +205,72 @@ class InterestRateViewController: UIViewController {
 
     private let accountNumberLabel = UILabel().then {
         $0.text = "016703-04-425292"
-        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = UIColor(named: "KBBlack")
+        $0.font = .font(.title2_18_semibold)
+        $0.textColor = .kbBlack
     }
 
     private let accountDivView = UIView().then {
-        $0.backgroundColor = UIColor(named: "KBBlack")
+        $0.backgroundColor = .kbBlack
         $0.alpha = 0.1
     }
 
     private let durationLabel = UILabel().then {
         $0.text = "계약기간"
-        $0.font = UIFont(name: "Pretendard-Light", size: 16)
+        $0.font = .font(.body1_16_light)
         $0.alpha = 0.6
-        $0.textColor = UIColor(named: "KBBlack")
+        $0.textColor = .kbBlack
     }
 
     private let durationInfoLabel = UILabel().then {
         $0.text = "12 개월"
-        $0.font = UIFont(name: "Pretendard-Light", size: 16)
+        $0.font = .font(.body1_16_light)
         $0.alpha = 0.8
-        $0.textColor = UIColor(named: "KBBlack")
+        $0.textColor = .kbBlack
     }
 
     private let newDateLabel = UILabel().then {
         $0.text = "신규일"
-        $0.font = UIFont(name: "Pretendard-Light", size: 16)
+        $0.font = .font(.body1_16_light)
         $0.alpha = 0.6
-        $0.textColor = UIColor(named: "KBBlack")
+        $0.textColor = .kbBlack
     }
 
     private let newDateInfoLabel = UILabel().then {
         $0.text = "2025.10.23"
-        $0.font = UIFont(name: "Pretendard-Light", size: 16)
+        $0.font = .font(.body1_16_light)
         $0.alpha = 0.8
         $0.textColor = UIColor(named: "KBBlack")
     }
 
     private let endDateLabel = UILabel().then {
         $0.text = "만기일"
-        $0.font = UIFont(name: "Pretendard-Light", size: 16)
+        $0.font = .font(.body1_16_light)
         $0.alpha = 0.6
-        $0.textColor = UIColor(named: "Black")
+        $0.textColor = .kbBlack
     }
 
     private let endDateInfoLabel = UILabel().then {
         $0.text = "2025.10.23"
-        $0.font = UIFont(name: "Pretendard-Light", size: 16)
+        $0.font = .font(.body1_16_light)
         $0.alpha = 0.8
-        $0.textColor = UIColor(named: "Black")
+        $0.textColor = .kbBlack
     }
 
     private let accountDivView2 = UIView().then {
-        $0.backgroundColor = UIColor(named: "KBBlack")
+        $0.backgroundColor = .kbBlack
         $0.alpha = 0.1
     }
 
     private let basicrateLabel = UILabel().then {
         $0.text = "기본이율"
-        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = UIColor(named: "KBBlack")
+        $0.font = .font(.title2_18_semibold)
+        $0.textColor = .kbBlack
     }
 
     private let rateinfoLabel = UILabel().then {
         $0.text = "(연이율, 세전, 단위: %)"
-        $0.font = UIFont(name: "Pretendard-Light", size: 13)
-        $0.textColor = UIColor(named: "KBBlack")
+        $0.font = .font(.caption1_13_light)
+        $0.textColor = .kbBlack
         $0.alpha = 0.5
     }
 
@@ -278,7 +278,7 @@ class InterestRateViewController: UIViewController {
         $0.axis = .horizontal
         $0.distribution = .fillEqually
         $0.alignment = .center
-        $0.backgroundColor = UIColor(named: "Gray1")
+        $0.backgroundColor = .gray1
     }
 
     private let rateTableValueStack = UIStackView().then {
@@ -289,51 +289,51 @@ class InterestRateViewController: UIViewController {
 
     private let termTitleLabel = UILabel().then {
         $0.text = "적용기간"
-        $0.font = UIFont(name: "Pretendard-Light", size: 14)
+        $0.font = .font(.body3_14_light)
         $0.textAlignment = .center
         $0.alpha = 0.6
-        $0.textColor = UIColor(named: "gray6")
+        $0.textColor = .gray6
     }
 
     private let rateTitleLabel = UILabel().then {
         $0.text = "기본이율"
-        $0.font = UIFont(name: "Pretendard-Light", size: 14)
+        $0.font = .font(.body3_14_light)
         $0.textAlignment = .center
         $0.alpha = 0.6
-        $0.textColor = UIColor(named: "gray6")
+        $0.textColor = .gray6
     }
 
     private let termValueLabel = UILabel().then {
         $0.text = "2025.04.23~2025.10.22"
-        $0.font = UIFont(name: "Pretendard-Light", size: 14)
+        $0.font = .font(.body3_14_light)
         $0.textAlignment = .center
-        $0.textColor = UIColor(named: "Black")
+        $0.textColor = .kbBlack
     }
 
     private let rateValueLabel = UILabel().then {
         $0.text = "2.3"
-        $0.font = UIFont(name: "Pretendard-Light", size: 14)
+        $0.font = .font(.body3_14_light)
         $0.textAlignment = .center
-        $0.textColor = UIColor(named: "KBBlack")
+        $0.textColor = .kbBlack
     }
 
     private let preferLabel = UILabel().then {
         $0.text = "우대이율"
-        $0.font = UIFont(name: "Pretendard-SemiBold", size: 18)
-        $0.textColor = UIColor(named: "KBBlack")
+        $0.font = .font(.title2_18_semibold)
+        $0.textColor = .kbBlack
     }
 
     private let cautionLabel = UILabel().then {
         $0.text = "이율정보는 조회시점 현재를 기준으로 조회된 \n내용이며 만기 시에 최종 확정됩니다."
-        $0.font = UIFont(name: "Pretendard-Light", size: 14)
-        $0.textColor = UIColor(named: "gray6")
+        $0.font = .font(.body3_14_light)
+        $0.textColor = .gray6
         $0.numberOfLines = 2
     }
 
     private let caution2Label = UILabel().then {
         $0.text = "중도 해지할 경우 중도해지이율이 적용되므로 \n유의하시기 바랍니다. "
-        $0.font = UIFont(name: "Pretendard-Light", size: 14)
-        $0.textColor = UIColor(named: "gray6")
+        $0.font = .font(.body3_14_light)
+        $0.textColor = .gray6
         $0.numberOfLines = 2
     }
 
