@@ -11,8 +11,10 @@ import Then
 
 class InterestRateViewController: UIViewController {
     
+    private let closeHeaderView = CloseHeaderView(title: "계좌이율 보기")
     private let scrollView = UIScrollView()
     private let contentView = UIView()
+    
     private let accountView = InfoView()
     private let primeView = BasicRateView()
     private lazy var interestRateCollectionView = RateViewController().createCollectionView()
@@ -39,28 +41,34 @@ class InterestRateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setStyle()
-        setupScrollView()
+        setUI()
         setLayout()
     }
     
     private func setStyle() {
         view.backgroundColor = .white
         scrollView.showsVerticalScrollIndicator = false
-        navigationController?.navigationBar.isHidden = true
     }
     
-    private func setupScrollView() {
-        view.addSubview(scrollView)
-        scrollView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
+    private func setUI() {
+        view.addSubviews(closeHeaderView, scrollView)
         scrollView.addSubview(contentView)
+        contentView.addSubviews(accountView, primeView, preferLabel,interestRateCollectionView, cautionLabel, caution2Label)
     }
     
     private func setLayout() {
+        closeHeaderView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(-40)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(48)
+        }
         
-        contentView.addSubviews(accountView, primeView, preferLabel,interestRateCollectionView, cautionLabel, caution2Label)
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(closeHeaderView.snp.bottom).offset(18)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
         
         contentView.snp.makeConstraints {
             $0.edges.width.equalToSuperview()

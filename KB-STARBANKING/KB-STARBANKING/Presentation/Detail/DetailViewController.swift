@@ -13,6 +13,7 @@ class DetailViewController: UIViewController {
     
     // MARK: - Properties
     
+    private let closeHeaderView = CloseHeaderView(title: "계좌상세정보")
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     
@@ -35,11 +36,10 @@ class DetailViewController: UIViewController {
     private func setStyle() {
         view.backgroundColor = .kbWhite
         scrollView.showsVerticalScrollIndicator = false
-        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     private func setUI() {
-        view.addSubview(scrollView)
+        view.addSubviews(closeHeaderView, scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubviews(
             detailAccountView,
@@ -49,12 +49,19 @@ class DetailViewController: UIViewController {
     }
     
     private func setLayout() {
+        closeHeaderView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(-40)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(48)
+        }
+        
         scrollView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(closeHeaderView.snp.bottom).offset(18)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
         
         contentView.snp.makeConstraints {
-            $0.edges.width.equalToSuperview()
+            $0.edges.width.equalTo(scrollView)
         }
         
         detailAccountView.snp.makeConstraints {

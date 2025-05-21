@@ -14,17 +14,6 @@ final class DetailAccountView: UIView {
     
     // MARK: - Properties
     
-    private let titleLabel = UILabel().then {
-        $0.text = "계좌상세정보"
-        $0.textColor = .kbBlack
-        $0.font = .font(.body1_16_light)
-    }
-    
-    private let closeButton = UIButton().then {
-        $0.contentMode = .scaleAspectFit
-        $0.setImage(.icClose, for: .normal)
-    }
-    
     private let infoStackView = UIStackView().then {
         $0.axis = .vertical
         $0.spacing = 12
@@ -54,28 +43,13 @@ final class DetailAccountView: UIView {
     // MARK: - UI Setting
     
     private func setUI() {
-        addSubviews(
-            titleLabel,
-            closeButton,
-            infoStackView,
-            seperatorView
-        )
+        addSubviews(infoStackView, seperatorView)
     }
     
     private func setLayout() {
-        titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(13)
-            $0.leading.equalToSuperview().offset(19)
-        }
-        
-        closeButton.snp.makeConstraints {
-            $0.centerY.equalTo(titleLabel)
-            $0.trailing.equalToSuperview().inset(19)
-            $0.size.equalTo(24)
-        }
         
         infoStackView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(31)
+            $0.top.equalToSuperview().offset(18)
             $0.horizontalEdges.equalToSuperview().inset(23)
         }
         
