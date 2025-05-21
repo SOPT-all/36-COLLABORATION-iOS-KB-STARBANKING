@@ -13,6 +13,7 @@ import Then
 final class DetailAccountView: UIView {
     
     // MARK: - Properties
+    
     private let titleLabel = UILabel().then {
         $0.text = "계좌상세정보"
         $0.textColor = .kbBlack
@@ -21,7 +22,7 @@ final class DetailAccountView: UIView {
     
     private let closeButton = UIButton().then {
         $0.contentMode = .scaleAspectFit
-        $0.setImage(UIImage(named: "ic_close"), for: .normal)
+        $0.setImage(.icClose, for: .normal)
     }
     
     private let infoStackView = UIStackView().then {
@@ -45,7 +46,7 @@ final class DetailAccountView: UIView {
         setLayout()
         setInfoRows()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -102,7 +103,7 @@ final class DetailAccountView: UIView {
     
     private func createInfoRow(title: String, value: String) -> UIView {
         let container = UIView()
-
+        
         let infoLabel = UILabel().then {
             $0.text = title
             $0.textColor = .kbBlack

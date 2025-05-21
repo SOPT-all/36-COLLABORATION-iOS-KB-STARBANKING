@@ -40,10 +40,7 @@ final class DetailInfoView: UIView {
     // MARK: - UI Setting
     
     private func setUI() {
-        addSubviews(
-            itemStackView,
-            dividerView
-        )
+        addSubviews(itemStackView, dividerView)
     }
     
     private func setLayout() {

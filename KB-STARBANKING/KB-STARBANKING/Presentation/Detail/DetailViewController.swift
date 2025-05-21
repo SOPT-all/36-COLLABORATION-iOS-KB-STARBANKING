@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 class DetailViewController: UIViewController {
-
+    
     // MARK: - Properties
     
     private let scrollView = UIScrollView()
@@ -24,7 +24,7 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         setStyle()
         setUI()
         setLayout()
@@ -41,7 +41,6 @@ class DetailViewController: UIViewController {
     private func setUI() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        
         contentView.addSubviews(
             detailAccountView,
             detailInfoView,
@@ -55,8 +54,7 @@ class DetailViewController: UIViewController {
         }
         
         contentView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-            $0.width.equalToSuperview()
+            $0.edges.width.equalToSuperview()
         }
         
         detailAccountView.snp.makeConstraints {
@@ -79,4 +77,3 @@ class DetailViewController: UIViewController {
         }
     }
 }
-

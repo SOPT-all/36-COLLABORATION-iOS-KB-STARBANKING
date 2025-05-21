@@ -42,10 +42,7 @@ final class ManageAccountView: UIView {
     // MARK: - UI Setting
     
     private func setUI() {
-        addSubviews(
-            manageLabel,
-            itemStackView
-        )
+        addSubviews(manageLabel, itemStackView)
     }
     
     private func setLayout() {
