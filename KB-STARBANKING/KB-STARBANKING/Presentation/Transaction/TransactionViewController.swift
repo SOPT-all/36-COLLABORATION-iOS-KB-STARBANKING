@@ -12,7 +12,7 @@ import Then
 
 class TransactionViewController: UIViewController {
     
-    private let navigationView = NavigationView()
+    private let navigationView = NavigationView(title: "거래내역조회")
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     

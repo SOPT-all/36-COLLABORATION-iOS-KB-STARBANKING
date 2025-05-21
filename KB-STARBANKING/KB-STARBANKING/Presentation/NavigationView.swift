@@ -2,61 +2,62 @@
 //  NavigationView.swift
 //  KB-STARBANKING
 //
-//  Created by 이세민 on 5/16/25.
+//  Created by 신혜연 on 5/17/25.
 //
 
 import UIKit
 
 import SnapKit
+import Then
 
-class NavigationView: UIView {
+final class NavigationView: UIView {
     
-    private let navigationView = UIView()
+    // MARK: - Properties
     
-    private let arrowBackIconView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = .icArrowLeft
-        return imageView
-    }()
+    private let navigationView = UIView().then {
+        $0.backgroundColor = .kbWhite
+    }
     
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "거래내역조회"
-        label.font = .font(.body1_16_light)
-        return label
-    }()
+    private let backButton = UIButton().then {
+        $0.setImage(.icArrowLeft, for: .normal)
+    }
     
-    private let homeIconView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = .icHome
-        return imageView
-    }()
+    private lazy var titleLabel = UILabel().then {
+        $0.font = .font(.body1_16_light)
+        $0.textColor = .kbBlack
+    }
     
-    private let menuIconView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = .icMenu
-        return imageView
-    }()
+    private let homeButton = UIButton().then {
+        $0.setImage(.icHome, for: .normal)
+    }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    private let menuButton = UIButton().then {
+        $0.setImage(.icMenu, for: .normal)
+    }
+    
+    // MARK: - Life Cycle
+    
+    init(title: String) {
+        super.init(frame: .zero)
+        titleLabel.text = title
         
-        setStyle()
         setUI()
         setLayout()
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setStyle(){
-        self.backgroundColor = .kbWhite
-    }
+    // MARK: - UI Setting
     
     private func setUI() {
         addSubview(navigationView)
-        navigationView.addSubviews(arrowBackIconView, titleLabel, homeIconView, menuIconView)
+        navigationView.addSubviews(backButton,
+                                   titleLabel,
+                                   homeButton,
+                                   menuButton)
     }
     
     private func setLayout() {
@@ -66,26 +67,26 @@ class NavigationView: UIView {
             $0.height.equalTo(48)
         }
         
-        arrowBackIconView.snp.makeConstraints {
+        backButton.snp.makeConstraints {
+            $0.size.equalTo(24)
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(19)
-            $0.size.equalTo(24)
         }
         
         titleLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalTo(arrowBackIconView.snp.trailing).offset(4)
+            $0.leading.equalTo(backButton.snp.trailing).offset(4)
         }
         
-        menuIconView.snp.makeConstraints {
+        menuButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().offset(-19)
             $0.size.equalTo(24)
         }
         
-        homeIconView.snp.makeConstraints {
+        homeButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalTo(menuIconView.snp.leading).offset(-18)
+            $0.trailing.equalTo(menuButton.snp.leading).offset(-18)
             $0.size.equalTo(24)
         }
     }

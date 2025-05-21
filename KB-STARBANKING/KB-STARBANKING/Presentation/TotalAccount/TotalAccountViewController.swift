@@ -11,10 +11,10 @@ class TotalAccountViewController: UIViewController {
     
     // MARK: - Properties
     
+    private let navigationView = NavigationView(title: "전체계좌조회")
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     
-    private let totalAccountHeaderView = TotalAccountHeaderView()
     private let addBankView = AddBankView()
     private let depositHeader = SectionHeaderView(title: "예금 · 적금", backgroundColor: .blue2, isDeposit: true)
     private let accountView = AccountViewController()
@@ -41,11 +41,10 @@ class TotalAccountViewController: UIViewController {
     }
     
     private func setUI() {
-        view.addSubview(scrollView)
+        view.addSubviews(navigationView, scrollView)
         scrollView.addSubview(contentView)
         
         contentView.addSubviews(
-            totalAccountHeaderView,
             addBankView,
             depositHeader,
             accountView.view,
@@ -56,23 +55,23 @@ class TotalAccountViewController: UIViewController {
     }
     
     private func setLayout() {
-        scrollView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
-        }
-        
-        contentView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-            $0.width.equalToSuperview()
-        }
-        
-        totalAccountHeaderView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview().inset(19)
+        navigationView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(-40)
+            $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(48)
         }
         
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(navigationView.snp.bottom).offset(18)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        contentView.snp.makeConstraints {
+            $0.edges.width.equalTo(scrollView)
+        }
+        
         addBankView.snp.makeConstraints {
-            $0.top.equalTo(totalAccountHeaderView.snp.bottom).offset(18)
+            $0.top.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(20)
             $0.height.equalTo(24)
         }
