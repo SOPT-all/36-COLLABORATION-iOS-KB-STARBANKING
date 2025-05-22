@@ -14,8 +14,6 @@ final class AccountCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    static let identifier = "DepositAccountCell"
-    
     private let nameLabel = UILabel().then {
         $0.font = .font(.body1_16_light)
         $0.textColor = .kbBlack

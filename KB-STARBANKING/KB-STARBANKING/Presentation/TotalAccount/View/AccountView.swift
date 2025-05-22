@@ -1,5 +1,5 @@
 //
-//  AccountViewController.swift
+//  AccountView.swift
 //  KB-STARBANKING
 //
 //  Created by 신혜연 on 5/19/25.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AccountViewController: UIViewController {
+final class AccountView: UIView {
     
     // MARK: - Properties
     
@@ -29,17 +29,21 @@ final class AccountViewController: UIViewController {
     
     // MARK: - Life Cycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         setUI()
         setLayout()
         setDelegate()
     }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - UI Setting
     private func setUI() {
-        view.addSubview(collectionView)
+        addSubview(collectionView)
     }
     
     private func setLayout() {
@@ -59,7 +63,7 @@ final class AccountViewController: UIViewController {
 
 // MARK: - UICollectionViewDataSource
 
-extension AccountViewController: UICollectionViewDataSource {
+extension AccountView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dummyData.count
@@ -86,7 +90,7 @@ extension AccountViewController: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegate
 
-extension AccountViewController: UICollectionViewDelegate {
+extension AccountView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // 여기에 셀 선택 시 동작 작성

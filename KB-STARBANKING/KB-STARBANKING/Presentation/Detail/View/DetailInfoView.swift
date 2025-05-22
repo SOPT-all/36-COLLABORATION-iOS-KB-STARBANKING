@@ -40,10 +40,7 @@ final class DetailInfoView: UIView {
     // MARK: - UI Setting
     
     private func setUI() {
-        addSubviews(
-            itemStackView,
-            dividerView
-        )
+        addSubviews(itemStackView, dividerView)
     }
     
     private func setLayout() {
@@ -78,7 +75,7 @@ final class DetailInfoView: UIView {
         
         let arrowDownButton = UIButton().then {
             $0.contentMode = .scaleAspectFit
-            $0.setImage(UIImage(named: "ic_arrow_down"), for: .normal)
+            $0.setImage(.icArrowDown, for: .normal)
         }
         
         let seperatorView = UIView().then {

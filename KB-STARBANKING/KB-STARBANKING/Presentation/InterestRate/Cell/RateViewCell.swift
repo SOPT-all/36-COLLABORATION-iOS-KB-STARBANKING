@@ -12,19 +12,11 @@ import Then
 
 class RateViewCell: UICollectionViewCell {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        contentView.layer.cornerRadius = 11 
-        contentView.backgroundColor = .gray1
-        setLayout()
+    private let yellowTop = UIView().then {
+        $0.layer.cornerRadius = 11
+        $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        $0.backgroundColor = .yellow2
     }
-    
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    static let identifier = "RateViewCell"
     
     private let imageView = UIImageView()
     
@@ -71,22 +63,32 @@ class RateViewCell: UICollectionViewCell {
         $0.layer.cornerRadius = 4
     }
     
-    private func setLayout() {
-        let yellowTop = UIView().then {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setStyle()
+        setUI()
+        setLayout()
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setStyle() {
+        contentView.do {
             $0.layer.cornerRadius = 11
-            $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-            $0.backgroundColor = .yellow2
+            $0.backgroundColor = .gray1
         }
+    }
+    
+    private func setUI() {
         contentView.addSubview(yellowTop)
-        
-        [nameLabel,imageView].forEach {
-            yellowTop.addSubview($0)
-        }
-        
-        [rateLabel,rateValueLabel,periodLabel,periodValueLabel,goButton].forEach {
-            contentView.addSubview($0)
-        }
-        
+        yellowTop.addSubviews(nameLabel, imageView, rateLabel, rateValueLabel, periodLabel, periodValueLabel, goButton)
+    }
+    
+    private func setLayout() {
         yellowTop.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(90)
@@ -105,21 +107,22 @@ class RateViewCell: UICollectionViewCell {
             $0.bottom.equalToSuperview().inset(3)
             $0.width.height.equalTo(50)
         }
+        
         rateLabel.snp.makeConstraints {
             $0.top.equalTo(yellowTop.snp.bottom).offset(10)
             $0.leading.equalToSuperview().inset(12)
         }
-                
+        
         rateValueLabel.snp.makeConstraints {
             $0.centerY.equalTo(rateLabel)
             $0.trailing.equalToSuperview().inset(12)
         }
-                
+        
         periodLabel.snp.makeConstraints {
             $0.top.equalTo(rateLabel.snp.bottom).offset(10)
             $0.leading.equalToSuperview().inset(12)
         }
-                
+        
         periodValueLabel.snp.makeConstraints {
             $0.centerY.equalTo(periodLabel)
             $0.trailing.equalToSuperview().inset(12)
@@ -130,7 +133,6 @@ class RateViewCell: UICollectionViewCell {
             $0.leading.trailing.equalToSuperview().inset(12)
             $0.height.equalTo(31)
         }
-        
     }
 }
 

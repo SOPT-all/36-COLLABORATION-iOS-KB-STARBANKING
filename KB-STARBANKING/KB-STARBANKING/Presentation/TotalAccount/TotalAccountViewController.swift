@@ -11,15 +11,18 @@ class TotalAccountViewController: UIViewController {
     
     // MARK: - Properties
     
+    private let navigationView = NavigationView(title: "전체계좌조회")
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     
-    private let totalAccountHeaderView = TotalAccountHeaderView()
     private let addBankView = AddBankView()
+    
     private let depositHeader = SectionHeaderView(title: "예금 · 적금", backgroundColor: .blue2, isDeposit: true)
-    private let accountView = AccountViewController()
+    private let accountView = AccountView()
+    
     private let insuranceHeader = SectionHeaderView(title: "보험 · 공제", backgroundColor: .gray3, isDeposit: false)
     private let retirementHeader = SectionHeaderView(title: "퇴직연금", backgroundColor: .gray3, isDeposit: false)
+    
     private let businessAccountView = BusinessAccountView()
     
     // MARK: - Life Cycle
@@ -37,18 +40,16 @@ class TotalAccountViewController: UIViewController {
     private func setStyle() {
         view.backgroundColor = .kbWhite
         scrollView.showsVerticalScrollIndicator = false
-        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     private func setUI() {
-        view.addSubview(scrollView)
+        view.addSubviews(navigationView, scrollView)
         scrollView.addSubview(contentView)
         
         contentView.addSubviews(
-            totalAccountHeaderView,
             addBankView,
             depositHeader,
-            accountView.view,
+            accountView,
             insuranceHeader,
             retirementHeader,
             businessAccountView
@@ -56,23 +57,23 @@ class TotalAccountViewController: UIViewController {
     }
     
     private func setLayout() {
-        scrollView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
-        }
-        
-        contentView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-            $0.width.equalToSuperview()
-        }
-        
-        totalAccountHeaderView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview().inset(19)
+        navigationView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(-40)
+            $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(48)
         }
         
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(navigationView.snp.bottom).offset(18)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        contentView.snp.makeConstraints {
+            $0.edges.width.equalTo(scrollView)
+        }
+        
         addBankView.snp.makeConstraints {
-            $0.top.equalTo(totalAccountHeaderView.snp.bottom).offset(18)
+            $0.top.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(20)
             $0.height.equalTo(24)
         }
@@ -84,14 +85,14 @@ class TotalAccountViewController: UIViewController {
             $0.height.equalTo(44)
         }
         
-        accountView.view.snp.makeConstraints {
+        accountView.snp.makeConstraints {
             $0.top.equalTo(depositHeader.snp.bottom).offset(14)
             $0.horizontalEdges.equalToSuperview().inset(15)
             $0.height.equalTo(516)
         }
         
         insuranceHeader.snp.makeConstraints {
-            $0.top.equalTo(accountView.view.snp.bottom).offset(14)
+            $0.top.equalTo(accountView.snp.bottom).offset(14)
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview()
             $0.height.equalTo(44)
@@ -108,7 +109,7 @@ class TotalAccountViewController: UIViewController {
             $0.top.equalTo(retirementHeader.snp.bottom).offset(23)
             $0.horizontalEdges.equalToSuperview().inset(20)
             $0.height.equalTo(44)
-            $0.bottom.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview().inset(50)
         }
     }
 }
