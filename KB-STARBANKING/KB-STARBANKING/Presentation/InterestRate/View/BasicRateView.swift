@@ -52,14 +52,12 @@ class BasicRateView: UIView {
     }
     
     private let termValueLabel = UILabel().then {
-        $0.text = "2025.04.23~2025.10.22"
         $0.font = .font(.body3_14_light)
         $0.textAlignment = .center
         $0.textColor = .kbBlack
     }
     
     private let rateValueLabel = UILabel().then {
-        $0.text = "2.3"
         $0.font = .font(.body3_14_light)
         $0.textAlignment = .center
         $0.textColor = .kbBlack
@@ -122,5 +120,18 @@ class BasicRateView: UIView {
         rateValueLabel.snp.makeConstraints {
             $0.width.equalTo(99)
         }
+    }
+    
+    func configure(with interestrate: InterestRateResponse) {
+        termValueLabel.text = maketermValueText(newDate: interestrate.startDate, endBaseDate: interestrate.baseEndDate)
+        rateValueLabel.text = makeRateText(rate: interestrate.baseRate)
+    }
+    
+    private func maketermValueText(newDate: String, endBaseDate: String) -> String {
+        return "\(newDate) ~ \(endBaseDate)"
+    }
+    
+    private func makeRateText(rate: String) -> String {
+        return "\(rate)"
     }
 }

@@ -11,6 +11,8 @@ import Then
 
 class InterestRateViewController: UIViewController {
     
+    var accountId: Int = 1
+    
     private let closeHeaderView = CloseHeaderView(title: "계좌이율 보기")
     private let scrollView = UIScrollView()
     private let contentView = UIView()
@@ -25,6 +27,24 @@ class InterestRateViewController: UIViewController {
         setStyle()
         setUI()
         setLayout()
+        fetchInterestRate()
+    }
+    
+    private func fetchInterestRate() {
+        Task {
+            do{
+                let interestRateData = try await InterestRateService.shared.fetchInterestRate(accountId: accountId)
+                
+                DispatchQueue.main.async {[weak self] in
+                    guard let self = self else { return }
+                    self.infoView.configure(with: interestRateData)
+                    self.basicRateView.configure(with: interestRateData)
+                    self.preferentialRateView.configure(with: interestRateData)
+                }
+            } catch {
+                print("거래 실패 : \(error.localizedDescription)")
+            }
+        }
     }
     
     private func setStyle() {
