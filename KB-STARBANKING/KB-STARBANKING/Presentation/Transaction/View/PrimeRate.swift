@@ -270,9 +270,7 @@ class PrimeRate: UIView {
                 valueLabel.textColor = .kbBlack
             }
             
-            hStack.addArrangedSubview(titleLabel)
-            hStack.addArrangedSubview(valueLabel)
-            
+            hStack.addArrangedSubviews(titleLabel, valueLabel)
             paymentStackView.addArrangedSubview(hStack)
         }
     }
