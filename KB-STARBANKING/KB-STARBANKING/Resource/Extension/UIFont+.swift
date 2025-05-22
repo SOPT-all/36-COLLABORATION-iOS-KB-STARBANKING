@@ -15,6 +15,7 @@ enum KBFont {
     case title2_18_semibold
     case title2_18_light
     
+    case subtitle1_18_semibold
     case subtitle1_18_light
     
     case body1_16_semibold
@@ -32,7 +33,7 @@ enum KBFont {
     var fontSize: CGFloat {
         switch self {
         case .title1_24_semibold, .title1_24_light: return 24
-        case .title2_18_bold, .title2_18_semibold, .title2_18_light, .subtitle1_18_light: return 18
+        case .title2_18_bold, .title2_18_semibold, .title2_18_light, .subtitle1_18_semibold, .subtitle1_18_light: return 18
         case .body1_16_semibold, .body1_16_light: return 16
         case .body2_15_semibold, .body2_15_regular, .body2_15_light: return 15
         case .body3_14_light, .body3_14_medium: return 14
@@ -47,7 +48,7 @@ enum KBFont {
         switch self {
         case .title2_18_bold:
             return "Pretendard-Bold"
-        case .title1_24_semibold, .title2_18_semibold, .body1_16_semibold, .body2_15_semibold:
+        case .title1_24_semibold, .title2_18_semibold, .subtitle1_18_semibold, .body1_16_semibold, .body2_15_semibold:
             return "Pretendard-Semibold"
         case .body3_14_medium, .caption3_11_medium:
             return "Pretendard-Medium"

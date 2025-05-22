@@ -13,7 +13,7 @@ class PrimeRate: UIView {
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "현재 적용 중인 우대금리는\n연 6.00%에요"
+        label.font = .font(.subtitle1_18_semibold)
         label.font = .font(.subtitle1_18_light)
         label.textColor = .kbBlack
         label.numberOfLines = 2
