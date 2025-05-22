@@ -36,25 +36,20 @@ class TransactionViewController: UIViewController {
     
     private func fetchTransaction() {
         Task {
-            do {
-                let transaction = try await TransactionService.shared.fetchTransaction(accountId: accountId)
-                print("계좌 이름: \(transaction.savingAccountName)")
-                print("잔액: \(transaction.totalBalance)")
-                print("시작일: \(transaction.startDate), 종료일: \(transaction.endDate)")
-                print("D-Day: \(transaction.dDay)")
-                print("우대금리: \(transaction.preferentialRate), 최대 적용금리: \(transaction.maxAppliedRate)")
-                
-                for deposit in transaction.deposits {
-                    print("----")
-                    print("입금 ID: \(deposit.id), 횟수: \(deposit.count)")
-                    print("입금일: \(deposit.depositDate), 입금액: \(deposit.payment)")
-                    print("입금 후 잔액: \(deposit.afterPaymentBalance), 적용 금리: \(deposit.appliedRate)")
+                do {
+                    let transaction = try await TransactionService.shared.fetchTransaction(accountId: accountId)
+                    
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else { return }
+                        self.accountInfo.configure(with: transaction)
+//                        self.primeRate.configure(with: transaction)
+                    }
+                    
+                } catch {
+                    print("거래 내역 불러오기 실패: \(error.localizedDescription)")
                 }
-            } catch {
-                print("거래 내역 불러오기 실패: \(error.localizedDescription)")
             }
         }
-    }
     
     private func setStyle() {
         view.backgroundColor = .kbWhite
