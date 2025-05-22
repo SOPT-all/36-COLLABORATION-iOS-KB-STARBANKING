@@ -12,8 +12,6 @@ import Then
 
 class RateViewCell: UICollectionViewCell {
     
-    static let identifier = "RateViewCell"
-    
     private let yellowTop = UIView().then {
         $0.layer.cornerRadius = 11
         $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
