@@ -19,7 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let navigationController = UINavigationController(rootViewController: InterestRateViewController())
+        // TotalAccountViewController(뷰1)로 돌려놓고 푸시할 것
+        let navigationController = UINavigationController(rootViewController: TotalAccountViewController())
         
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = navigationController

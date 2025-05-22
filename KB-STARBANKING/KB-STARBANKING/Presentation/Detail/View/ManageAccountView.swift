@@ -79,7 +79,7 @@ final class ManageAccountView: UIView {
         
         let arrowRightButton = UIButton().then {
             $0.contentMode = .scaleAspectFit
-            $0.setImage(UIImage(named: "ic_arrow_right"), for: .normal)
+            $0.setImage(.icArrowRight, for: .normal)
         }
         
         let seperatorView = UIView().then {

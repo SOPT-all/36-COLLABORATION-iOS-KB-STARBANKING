@@ -75,7 +75,7 @@ final class DetailInfoView: UIView {
         
         let arrowDownButton = UIButton().then {
             $0.contentMode = .scaleAspectFit
-            $0.setImage(UIImage(named: "ic_arrow_down"), for: .normal)
+            $0.setImage(.icArrowDown, for: .normal)
         }
         
         let seperatorView = UIView().then {
