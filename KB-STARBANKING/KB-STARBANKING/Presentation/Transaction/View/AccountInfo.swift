@@ -6,7 +6,6 @@
 //
 
 import UIKit
-
 import SnapKit
 
 class AccountInfo: UIView {
@@ -58,7 +57,6 @@ class AccountInfo: UIView {
         let progressView = UIProgressView()
         progressView.progressTintColor = .yellow3
         progressView.trackTintColor = .gray1
-        progressView.progress = 0.3
         progressView.layer.borderColor = UIColor.gray4.cgColor
         progressView.layer.cornerRadius = 5
         progressView.layer.borderWidth = 1
@@ -104,7 +102,6 @@ class AccountInfo: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setStyle()
         setUI()
         setLayout()
@@ -188,7 +185,6 @@ class AccountInfo: UIView {
         
         depositButton.snp.makeConstraints {
             $0.top.equalTo(expirationDateLabel.snp.bottom).offset(30)
-            $0.top.equalTo(expirationDateLabel.snp.bottom).offset(30)
             $0.leading.equalToSuperview().offset(20)
             $0.width.equalTo(164)
             $0.height.equalTo(38)
@@ -209,17 +205,40 @@ class AccountInfo: UIView {
         ddaylabel.text = transaction.dDay
         newDateLabel.text = "신규일 \(transaction.startDate)"
         expirationDateLabel.text = "만기일 \(transaction.endDate)"
+        
+        let progress = calculateProgress(from: transaction.startDate, to: transaction.endDate)
+        expirationDateProgressView.setProgress(progress, animated: true)
     }
     
     private func updateBalanceLabel(with balance: Int) {
         let balanceString = String(balance).decimalFormatted
         let unit = " 원"
-        
         let fullText = balanceString + unit
         let attributedText = NSMutableAttributedString(string: fullText)
         attributedText.addAttributes([.font: UIFont.font(.title1_24_light)], range: NSRange(location: 0, length: fullText.count))
         attributedText.addAttribute(.font, value: UIFont.font(.title1_24_semibold), range: NSRange(location: 0, length: balanceString.count))
-        
         balanceLabel.attributedText = attributedText
+    }
+    
+    private func calculateProgress(from startDate: String, to endDate: String) -> Float {
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yyyy-MM-dd"
+        
+        guard
+            let startDate = dateformatter.date(from: startDate),
+            let endDate = dateformatter.date(from: endDate)
+        else {
+            return 0
+        }
+        
+        let now = Date()
+        let totalInterval = endDate.timeIntervalSince(startDate)
+        guard totalInterval > 0 else {
+            return 1
+        }
+        
+        let elapsed = now.timeIntervalSince(startDate)
+        let progress = Float(elapsed / totalInterval)
+        return min(max(progress, 0), 1)
     }
 }
