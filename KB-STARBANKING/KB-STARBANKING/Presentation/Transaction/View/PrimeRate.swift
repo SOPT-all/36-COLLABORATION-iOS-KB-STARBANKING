@@ -246,25 +246,9 @@ class PrimeRate: UIView {
         return "현재 적용 중인 우대금리는\n연 \(rate)%에요"
     }
     
-    private func formatDate(_ dateString: String) -> String {
-        let inputFormatter = DateFormatter()
-        inputFormatter.dateFormat = "yyyy.MM.dd"
-        inputFormatter.locale = Locale(identifier: "ko_KR")
-        
-        let outputFormatter = DateFormatter()
-        outputFormatter.dateFormat = "yy년 M월 d일"
-        outputFormatter.locale = Locale(identifier: "ko_KR")
-        
-        if let date = inputFormatter.date(from: dateString) {
-            return outputFormatter.string(from: date)
-        }
-        
-        return dateString
-    }
-    
     private func makeSubDescriptionText(endDate: String, maxRate: String) -> String {
         return """
-        \(formatDate(endDate))까지 123,900원 모을 수 있어요.
+        \(endDate.toFormattedDate())까지 123,900원 모을 수 있어요.
         해당 상품의 최고 적용금리는 연 \(maxRate)%입니다.
         """
     }
