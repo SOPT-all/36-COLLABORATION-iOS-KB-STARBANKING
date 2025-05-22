@@ -42,7 +42,7 @@ class TransactionViewController: UIViewController {
                     DispatchQueue.main.async { [weak self] in
                         guard let self = self else { return }
                         self.accountInfo.configure(with: transaction)
-//                        self.primeRate.configure(with: transaction)
+                        self.primeRate.configure(with: transaction)
                     }
                     
                 } catch {
