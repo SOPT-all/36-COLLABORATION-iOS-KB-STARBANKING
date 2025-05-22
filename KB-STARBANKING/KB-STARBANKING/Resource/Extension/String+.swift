@@ -26,5 +26,12 @@ extension String {
         return self
     }
     
-    
+    // 숫자 문자열에 천 단위 구분 쉼표를 추가
+    var decimalFormatted: String {
+        guard let number = Int(self) else { return self }
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        return numberFormatter.string(from: NSNumber(value: number)) ?? self
+    }
 }

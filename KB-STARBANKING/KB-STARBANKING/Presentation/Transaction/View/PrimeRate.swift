@@ -264,8 +264,8 @@ class PrimeRate: UIView {
     private func updatePaymentItems(deposit: Deposits) {
         let items: [(String, String)] = [
             ("납입일자", deposit.depositDate),
-            ("납입금액", "\(deposit.payment) 원"),
-            ("납입 후 잔액", "\(deposit.afterPaymentBalance) 원"),
+            ("납입금액", "\(String(deposit.payment).decimalFormatted) 원"),
+            ("납입 후 잔액", "\(String(deposit.afterPaymentBalance).decimalFormatted) 원"),
             ("적금방식", "1일 1회 직접 입금"),
             ("적용금리", "연 \(deposit.appliedRate)%")
         ]
@@ -285,7 +285,7 @@ class PrimeRate: UIView {
             valueLabel.font = .font(.body2_15_regular)
             valueLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
             
-            if title == "납입금액", let range = value.range(of: "\(deposit.payment)") {
+            if title == "납입금액", let range = value.range(of: "\(String(deposit.payment).decimalFormatted)") {
                 let attributed = NSMutableAttributedString(string: value)
                 attributed.addAttribute(.foregroundColor, value: UIColor.blue1, range: NSRange(range, in: value))
                 valueLabel.attributedText = attributed

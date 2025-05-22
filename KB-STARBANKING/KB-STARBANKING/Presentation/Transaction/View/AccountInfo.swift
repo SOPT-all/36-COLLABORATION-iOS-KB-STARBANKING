@@ -212,15 +212,13 @@ class AccountInfo: UIView {
     }
     
     private func updateBalanceLabel(with balance: Int) {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        let formattedAmount = numberFormatter.string(from: NSNumber(value: balance)) ?? "\(balance)"
-        
+        let balanceString = String(balance).decimalFormatted
         let unit = " 원"
-        let fullText = formattedAmount + unit
+        
+        let fullText = balanceString + unit
         let attributedText = NSMutableAttributedString(string: fullText)
         attributedText.addAttributes([.font: UIFont.font(.title1_24_light)], range: NSRange(location: 0, length: fullText.count))
-        attributedText.addAttribute(.font, value: UIFont.font(.title1_24_semibold), range: NSRange(location: 0, length: formattedAmount.count))
+        attributedText.addAttribute(.font, value: UIFont.font(.title1_24_semibold), range: NSRange(location: 0, length: balanceString.count))
         
         balanceLabel.attributedText = attributedText
     }
