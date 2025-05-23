@@ -13,8 +13,7 @@ class PrimeRate: UIView {
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "현재 적용 중인 우대금리는\n연 6.00%에요"
-        label.font = .font(.subtitle1_18_light)
+        label.font = .font(.subtitle1_18_semibold)
         label.textColor = .kbBlack
         label.numberOfLines = 2
         return label
@@ -22,7 +21,6 @@ class PrimeRate: UIView {
     
     private let subDescriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "25년 10월 23일까지 123,900원 모을 수 있어요.\n해당 상품의 최고 적용금리는 연 8.00%입니다."
         label.font = .font(.body3_14_light)
         label.textColor = .gray6
         label.numberOfLines = 2
@@ -39,7 +37,6 @@ class PrimeRate: UIView {
     
     private let countLabel: UILabel = {
         let label = UILabel()
-        label.text = "1회차"
         label.font = .font(.body2_15_semibold)
         label.textColor = .kbBlack
         return label
@@ -54,7 +51,6 @@ class PrimeRate: UIView {
     
     private let dateLabel: UILabel = {
         let label = UILabel()
-        label.text = "2025.04월분"
         label.textColor = .gray6
         label.font = .font(.body3_14_medium)
         return label
@@ -127,7 +123,6 @@ class PrimeRate: UIView {
         setStyle()
         setUI()
         setLayout()
-        setPaymentItems()
     }
     
     required init?(coder: NSCoder) {
@@ -237,13 +232,42 @@ class PrimeRate: UIView {
         }
     }
     
-    private func setPaymentItems() {
+    func configure(with transaction: TransactionResponse) {
+        guard let firstDeposit = transaction.deposits.first else { return }
+        
+        descriptionLabel.text = makeDescriptionText(rate: transaction.preferentialRate)
+        subDescriptionLabel.text = makeSubDescriptionText(endDate: transaction.endDate, maxRate: transaction.maxAppliedRate)
+        countLabel.text = makeCountText(firstDeposit.count)
+        updateDateLabel(with: firstDeposit.depositDate)
+        updatePaymentItems(deposit: firstDeposit)
+    }
+    
+    private func makeDescriptionText(rate: String) -> String {
+        return "현재 적용 중인 우대금리는\n연 \(rate)%에요"
+    }
+    
+    private func makeSubDescriptionText(endDate: String, maxRate: String) -> String {
+        return """
+        \(endDate.toFormattedDate())까지 123,900원 모을 수 있어요.
+        해당 상품의 최고 적용금리는 연 \(maxRate)%입니다.
+        """
+    }
+    
+    private func makeCountText(_ count: Int) -> String {
+        return "\(count)회차"
+    }
+    
+    private func updateDateLabel(with date: String) {
+        dateLabel.text = "\(date.prefix(7))월분"
+    }
+    
+    private func updatePaymentItems(deposit: Deposits) {
         let items: [(String, String)] = [
-            ("납입일자", "2025.04.23"),
-            ("납입금액", "10,000 원"),
-            ("납입 후 잔액", "10,000 원"),
+            ("납입일자", deposit.depositDate),
+            ("납입금액", "\(String(deposit.payment).decimalFormatted) 원"),
+            ("납입 후 잔액", "\(String(deposit.afterPaymentBalance).decimalFormatted) 원"),
             ("적금방식", "1일 1회 직접 입금"),
-            ("적용금리", "연 6.00%")
+            ("적용금리", "연 \(deposit.appliedRate)%")
         ]
         
         items.forEach { title, value in
@@ -261,7 +285,7 @@ class PrimeRate: UIView {
             valueLabel.font = .font(.body2_15_regular)
             valueLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
             
-            if title == "납입금액", let range = value.range(of: "10,000") {
+            if title == "납입금액", let range = value.range(of: "\(String(deposit.payment).decimalFormatted)") {
                 let attributed = NSMutableAttributedString(string: value)
                 attributed.addAttribute(.foregroundColor, value: UIColor.blue1, range: NSRange(range, in: value))
                 valueLabel.attributedText = attributed

@@ -12,6 +12,8 @@ import Then
 
 class TransactionViewController: UIViewController {
     
+    var accountId: Int = 1
+    
     private let navigationView = NavigationView(title: "거래내역조회")
     private let scrollView = UIScrollView()
     private let contentView = UIView()
@@ -29,7 +31,25 @@ class TransactionViewController: UIViewController {
         setStyle()
         setUI()
         setLayout()
+        fetchTransaction()
     }
+    
+    private func fetchTransaction() {
+        Task {
+                do {
+                    let transaction = try await TransactionService.shared.fetchTransaction(accountId: accountId)
+                    
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else { return }
+                        self.accountInfo.configure(with: transaction)
+                        self.primeRate.configure(with: transaction)
+                    }
+                    
+                } catch {
+                    print("거래 내역 불러오기 실패: \(error.localizedDescription)")
+                }
+            }
+        }
     
     private func setStyle() {
         view.backgroundColor = .kbWhite
