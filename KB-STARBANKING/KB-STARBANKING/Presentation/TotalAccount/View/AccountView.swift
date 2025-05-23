@@ -11,10 +11,7 @@ final class AccountView: UIView {
     
     // MARK: - Properties
     
-    private let dummyData = [
-           ("KB맑은하늘적금", "512601-01-250726", "2025.04.23", "2025.10.23 (D-183)", "10,000"),
-           ("KB내맘대로적금(정액)", "016703-04-425292", "2025.04.23", "2025.10.23 (D-183)", "10,000")
-       ]
+    private var accounts: [Account] = []
     
     public let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -59,6 +56,11 @@ final class AccountView: UIView {
         collectionView.delegate = self
         collectionView.register(AccountCell.self, forCellWithReuseIdentifier: AccountCell.identifier)
     }
+    
+    public func updateAccounts(_ accounts: [Account]) {
+        self.accounts = accounts
+        collectionView.reloadData()
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -66,7 +68,7 @@ final class AccountView: UIView {
 extension AccountView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dummyData.count
+        return accounts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -74,15 +76,8 @@ extension AccountView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        let data = dummyData[indexPath.item]
-        cell.configure(
-            name: data.0,
-            account: data.1,
-            newDate: data.2,
-            endDate: data.3,
-            dday: data.3.components(separatedBy: " ").last ?? "",
-            balance: data.4
-        )
+        let account = accounts[indexPath.item]
+        cell.configure(with: account)
         
         return cell
     }

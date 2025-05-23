@@ -91,17 +91,21 @@ final class AccountCell: UICollectionViewCell {
     }
     
     // MARK: - UI Setting
-    
-    func configure(name: String, account: String, newDate: String, endDate: String, dday: String, balance: String) {
-        nameLabel.text = name
-        accountNumberLabel.text = account
+    func configure(with account: Account) {
+        nameLabel.text = account.name
+        accountNumberLabel.text = account.accountNumber
         newLabel.text = "신규일"
-        newDateLabel.text = newDate
+        newDateLabel.text = account.startDate
         endLabel.text = "만기일"
-        endDateLabel.text = endDate
-        DdayLabel.text = dday
-        balanceLabel.text = balance
+        endDateLabel.text = account.endDate
+        DdayLabel.text = account.dDay
+        updateBalanceLabel(with: account.accountBalance)
         wonLabel.text = "원"
+    }
+    
+    private func updateBalanceLabel(with balance: Int) {
+        let formatted = NumberFormatter.localizedString(from: NSNumber(value: balance), number: .decimal)
+        balanceLabel.text = formatted
     }
     
     private func setStyle() {
