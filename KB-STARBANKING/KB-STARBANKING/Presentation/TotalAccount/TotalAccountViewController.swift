@@ -33,7 +33,31 @@ class TotalAccountViewController: UIViewController {
         setStyle()
         setUI()
         setLayout()
+        fetchTotalAccount()
     }
+    
+    private func fetchTotalAccount() {
+        Task {
+            do {
+                let response = try await TotalAccountService.shared.fetchTotalAccount()
+                print("총 잔액: \(response.totalAccountBalance)원")
+                
+                for account in response.accounts {
+                    print("----")
+                    print("계좌 ID: \(account.id)")
+                    print("계좌 이름: \(account.name)")
+                    print("계좌 번호: \(account.accountNumber)")
+                    print("시작일: \(account.startDate), 종료일: \(account.endDate)")
+                    print("D-Day: \(account.dDay)")
+                    print("계좌 잔액: \(account.accountBalance)원")
+                }
+                
+            } catch {
+                print("전체 계좌 불러오기 실패: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     
     // MARK: - UI Setting
     
