@@ -31,29 +31,31 @@ class TransactionViewController: UIViewController {
         setStyle()
         setUI()
         setLayout()
+        setNavigation()
         fetchTransaction()
     }
     
     private func fetchTransaction() {
         Task {
-                do {
-                    let transaction = try await TransactionService.shared.fetchTransaction(accountId: accountId)
-                    
-                    DispatchQueue.main.async { [weak self] in
-                        guard let self = self else { return }
-                        self.accountInfo.configure(with: transaction)
-                        self.primeRate.configure(with: transaction)
-                    }
-                    
-                } catch {
-                    print("거래 내역 불러오기 실패: \(error.localizedDescription)")
+            do {
+                let transaction = try await TransactionService.shared.fetchTransaction(accountId: accountId)
+                
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.accountInfo.configure(with: transaction)
+                    self.primeRate.configure(with: transaction)
                 }
+                
+            } catch {
+                print("거래 내역 불러오기 실패: \(error.localizedDescription)")
             }
         }
+    }
     
     private func setStyle() {
         view.backgroundColor = .kbWhite
         scrollView.showsVerticalScrollIndicator = false
+        navigationController?.isNavigationBarHidden = true
     }
     
     private func setUI() {
@@ -64,7 +66,7 @@ class TransactionViewController: UIViewController {
     
     private func setLayout(){
         navigationView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(-40)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(48)
         }
@@ -95,6 +97,18 @@ class TransactionViewController: UIViewController {
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(524)
             $0.bottom.equalToSuperview().inset(50)
+        }
+    }
+    
+    private func setNavigation() {
+        navigationView.onBackButtonTapped = { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }
+        
+        accountInfo.onSettingButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            let detailVC = DetailViewController()
+            self.navigationController?.pushViewController(detailVC, animated: true)
         }
     }
 }

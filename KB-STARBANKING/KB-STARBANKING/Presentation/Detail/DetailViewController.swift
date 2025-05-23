@@ -31,6 +31,7 @@ class DetailViewController: UIViewController {
         setStyle()
         setUI()
         setLayout()
+        setNavigation()
         fetchDetail()
     }
     
@@ -50,6 +51,7 @@ class DetailViewController: UIViewController {
     private func setStyle() {
         view.backgroundColor = .kbWhite
         scrollView.showsVerticalScrollIndicator = false
+        navigationController?.isNavigationBarHidden = true
     }
     
     private func setUI() {
@@ -64,7 +66,7 @@ class DetailViewController: UIViewController {
     
     private func setLayout() {
         closeHeaderView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(-40)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(48)
         }
@@ -95,6 +97,18 @@ class DetailViewController: UIViewController {
             $0.horizontalEdges.equalToSuperview().inset(23)
             $0.height.equalTo(400)
             $0.bottom.equalToSuperview().inset(50)
+        }
+    }
+    
+    private func setNavigation() {
+        closeHeaderView.onCloseButtonTapped = { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        
+        manageAccountView.onInterestRateTapped = { [weak self] in
+            guard let self = self else { return }
+            let interestRateVC = InterestRateViewController()
+            self.navigationController?.pushViewController(interestRateVC, animated: true)
         }
     }
 }

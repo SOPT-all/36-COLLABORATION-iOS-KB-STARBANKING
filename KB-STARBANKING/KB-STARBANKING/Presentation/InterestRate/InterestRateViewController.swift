@@ -27,6 +27,7 @@ class InterestRateViewController: UIViewController {
         setStyle()
         setUI()
         setLayout()
+        setNavigation()
         fetchInterestRate()
     }
     
@@ -50,6 +51,7 @@ class InterestRateViewController: UIViewController {
     private func setStyle() {
         view.backgroundColor = .white
         scrollView.showsVerticalScrollIndicator = false
+        navigationController?.isNavigationBarHidden = true
     }
     
     private func setUI() {
@@ -60,7 +62,7 @@ class InterestRateViewController: UIViewController {
     
     private func setLayout() {
         closeHeaderView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(-40)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(48)
         }
@@ -91,6 +93,12 @@ class InterestRateViewController: UIViewController {
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(360)
             $0.bottom.equalToSuperview().inset(50)
+        }
+    }
+    
+    private func setNavigation() {
+        closeHeaderView.onCloseButtonTapped = { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
         }
     }
 }

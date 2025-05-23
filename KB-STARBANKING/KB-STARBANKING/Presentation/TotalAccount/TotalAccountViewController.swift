@@ -33,6 +33,7 @@ class TotalAccountViewController: UIViewController {
         setStyle()
         setUI()
         setLayout()
+        setNavigation()
         fetchTotalAccount()
     }
     
@@ -59,6 +60,7 @@ class TotalAccountViewController: UIViewController {
     private func setStyle() {
         view.backgroundColor = .kbWhite
         scrollView.showsVerticalScrollIndicator = false
+        navigationController?.isNavigationBarHidden = true
     }
     
     private func setUI() {
@@ -77,7 +79,7 @@ class TotalAccountViewController: UIViewController {
     
     private func setLayout() {
         navigationView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(-40)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(48)
         }
@@ -129,6 +131,13 @@ class TotalAccountViewController: UIViewController {
             $0.horizontalEdges.equalToSuperview().inset(20)
             $0.height.equalTo(44)
             $0.bottom.equalToSuperview().inset(50)
+        }
+    }
+    
+    private func setNavigation() {
+        accountView.onTransactionTapped = { [weak self] in
+            let transactionVC = TransactionViewController()
+            self?.navigationController?.pushViewController(transactionVC, animated: true)
         }
     }
 }

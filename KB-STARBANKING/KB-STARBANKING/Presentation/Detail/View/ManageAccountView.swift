@@ -12,6 +12,8 @@ import Then
 
 final class ManageAccountView: UIView {
     
+    var onInterestRateTapped: (() -> Void)?
+    
     // MARK: - Properties
     
     private let manageLabel = UILabel().then {
@@ -80,6 +82,8 @@ final class ManageAccountView: UIView {
         let arrowRightButton = UIButton().then {
             $0.contentMode = .scaleAspectFit
             $0.setImage(.icArrowRight, for: .normal)
+            $0.tag = info.hashValue
+            $0.addTarget(self, action: #selector(arrowTapped(_:)), for: .touchUpInside)
         }
         
         let seperatorView = UIView().then {
@@ -116,5 +120,11 @@ final class ManageAccountView: UIView {
         }
         
         return container
+    }
+    
+    @objc private func arrowTapped(_ sender: UIButton) {
+        if sender.tag == "계좌이율 보기".hashValue {
+            onInterestRateTapped?()
+        }
     }
 }
