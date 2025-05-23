@@ -12,7 +12,6 @@ import Then
 class InfoView: UIView {
 
     private let accountLabel = UILabel().then {
-        $0.text = "KB내맘대로적금"
         $0.font = .font(.body2_15_light)
         $0.textColor = .kbBlack
     }
@@ -22,7 +21,6 @@ class InfoView: UIView {
     }
 
     private let accountNumberLabel = UILabel().then {
-        $0.text = "016703-04-425292"
         $0.font = .font(.title2_18_semibold)
         $0.textColor = .kbBlack
     }
@@ -40,7 +38,6 @@ class InfoView: UIView {
     }
     
     private let durationInfoLabel = UILabel().then {
-        $0.text = "12 개월"
         $0.font = .font(.body1_16_light)
         $0.alpha = 0.8
         $0.textColor = .kbBlack
@@ -54,7 +51,6 @@ class InfoView: UIView {
     }
     
     private let newDateInfoLabel = UILabel().then {
-        $0.text = "2025.10.23"
         $0.font = .font(.body1_16_light)
         $0.alpha = 0.8
         $0.textColor = .kbBlack
@@ -68,7 +64,6 @@ class InfoView: UIView {
     }
     
     private let endDateInfoLabel = UILabel().then {
-        $0.text = "2025.10.23"
         $0.font = .font(.body1_16_light)
         $0.alpha = 0.8
         $0.textColor = .kbBlack
@@ -164,5 +159,17 @@ class InfoView: UIView {
             $0.width.equalTo(329)
             $0.height.equalTo(1)
         }
+    }
+    
+    func configure(with interestrate: InterestRateResponse){
+        accountLabel.text = interestrate.savingAccountName
+        accountNumberLabel.text = interestrate.accountNumber
+        durationInfoLabel.text = makeDurationText(duration: interestrate.contractPeriod)
+        newDateInfoLabel.text = interestrate.startDate
+        endDateInfoLabel.text = interestrate.endDate
+    }
+    
+    private func makeDurationText(duration: Int) -> String {
+        return "\(duration) 개월"
     }
 }
