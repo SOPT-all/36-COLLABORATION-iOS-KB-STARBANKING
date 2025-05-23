@@ -13,6 +13,8 @@ class DetailViewController: UIViewController {
     
     // MARK: - Properties
     
+    var accountId: Int = 1
+    
     private let closeHeaderView = CloseHeaderView(title: "계좌상세정보")
     private let scrollView = UIScrollView()
     private let contentView = UIView()
@@ -29,6 +31,21 @@ class DetailViewController: UIViewController {
         setStyle()
         setUI()
         setLayout()
+        fetchDetail()
+    }
+    
+    private func fetchDetail() {
+        Task {
+            do {
+                let detail = try await DetailService.shared.fetchDetail(accountId: accountId)
+                print("납입회차: \(detail.depositCount)")
+                print("계좌상태: \(detail.accountState)")
+                print("최종거래일: \(detail.lastTransaction)")
+                print("계약기간: \(detail.contractPeriod)")
+            } catch {
+                print("상세 정보 요청 실패: \(error.localizedDescription)")
+            }
+        }
     }
     
     // MARK: - UI Setting
