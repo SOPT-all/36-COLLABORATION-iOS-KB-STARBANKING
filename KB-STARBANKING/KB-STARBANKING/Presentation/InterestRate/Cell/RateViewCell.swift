@@ -27,6 +27,12 @@ class RateViewCell: UICollectionViewCell {
         $0.lineBreakMode = .byWordWrapping
     }
     
+    private let grayBottom = UIView().then {
+        $0.layer.cornerRadius = 11
+        $0.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        $0.backgroundColor = .gray1
+    }
+    
     private let rateLabel = UILabel().then {
         $0.font = .font(.caption1_13_light)
         $0.text = "우대이율"
@@ -66,7 +72,6 @@ class RateViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setStyle()
         setUI()
         setLayout()
     }
@@ -76,71 +81,73 @@ class RateViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setStyle() {
-        contentView.do {
-            $0.layer.cornerRadius = 11
-            $0.backgroundColor = .gray1
-        }
-    }
-    
     private func setUI() {
-        contentView.addSubview(yellowTop)
-        yellowTop.addSubviews(nameLabel, imageView, rateLabel, rateValueLabel, periodLabel, periodValueLabel, goButton)
+        addSubviews(yellowTop, grayBottom)
+        yellowTop.addSubviews(nameLabel, imageView)
+        grayBottom.addSubviews(rateLabel, rateValueLabel, periodLabel, periodValueLabel, goButton)
     }
     
     private func setLayout() {
         yellowTop.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(90)
+            $0.height.equalTo(95)
         }
         
         nameLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(10)
-            $0.leading.equalToSuperview().inset(10)
-            $0.trailing.lessThanOrEqualTo(imageView.snp.leading).offset(-8)
+            $0.top.equalToSuperview().offset(14)
+            $0.centerX.equalToSuperview()
             $0.width.equalTo(136)
             $0.height.equalTo(40)
         }
         
         imageView.snp.makeConstraints{
-            $0.trailing.equalToSuperview().inset(3)
-            $0.bottom.equalToSuperview().inset(3)
-            $0.width.height.equalTo(50)
+            $0.trailing.equalToSuperview().inset(4)
+            $0.bottom.equalToSuperview().inset(4)
+            $0.size.equalTo(50)
+        }
+        
+        grayBottom.snp.makeConstraints {
+            $0.top.equalTo(yellowTop.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(117)
         }
         
         rateLabel.snp.makeConstraints {
-            $0.top.equalTo(yellowTop.snp.bottom).offset(10)
-            $0.leading.equalToSuperview().inset(12)
+            $0.top.equalToSuperview().offset(10)
+            $0.leading.equalToSuperview().offset(12)
         }
         
         rateValueLabel.snp.makeConstraints {
             $0.centerY.equalTo(rateLabel)
-            $0.trailing.equalToSuperview().inset(12)
+            $0.trailing.equalToSuperview().offset(-12)
         }
         
         periodLabel.snp.makeConstraints {
-            $0.top.equalTo(rateLabel.snp.bottom).offset(10)
-            $0.leading.equalToSuperview().inset(12)
+            $0.top.equalTo(rateLabel.snp.bottom).offset(6)
+            $0.leading.equalToSuperview().offset(12)
         }
         
         periodValueLabel.snp.makeConstraints {
             $0.centerY.equalTo(periodLabel)
-            $0.trailing.equalToSuperview().inset(12)
+            $0.trailing.equalToSuperview().offset(-12)
         }
         
         goButton.snp.makeConstraints {
             $0.top.equalTo(periodLabel.snp.bottom).offset(18)
-            $0.leading.trailing.equalToSuperview().inset(12)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(136)
             $0.height.equalTo(31)
         }
     }
 }
 
 extension RateViewCell {
-    func dataBind(_ rate: PreferentialRate) {
-        imageView.image = UIImage()
-        nameLabel.text = rate.name
+    func dataBind(savingAccountName: String, rate: PreferentialRate) {
+        let imageName = "imgCard\(rate.id)"
+        
+        imageView.image = UIImage(named: imageName)
+        nameLabel.text = "\(savingAccountName)\n\(rate.name)"
         rateValueLabel.text = "\(rate.rate)"
-        periodValueLabel.text = "\(rate.startDate) ~ \(rate.endDate)"
+        periodValueLabel.text = "\(rate.startDate.toMonthDayFormat()) ~ \(rate.endDate.toMonthDayFormat())"
     }
 }

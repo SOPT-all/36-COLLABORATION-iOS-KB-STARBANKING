@@ -10,7 +10,7 @@ import Foundation
 extension String {
     
     // "yyyy.MM.dd" 형식 → "yy년 M월 d일" 형식
-    func toFormattedDate() -> String {
+    func toKoreanFormattedDate() -> String {
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = "yyyy.MM.dd"
         inputFormatter.locale = Locale(identifier: "ko_KR")
@@ -25,6 +25,23 @@ extension String {
         
         return self
     }
+    
+    func toMonthDayFormat() -> String {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy.MM.dd"
+        inputFormatter.locale = Locale(identifier: "ko_KR")
+        
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "MM.dd"
+        outputFormatter.locale = Locale(identifier: "ko_KR")
+        
+        if let date = inputFormatter.date(from: self) {
+            return outputFormatter.string(from: date)
+        }
+        
+        return self
+    }
+    
     
     // 숫자 문자열에 천 단위 구분 쉼표를 추가
     var decimalFormatted: String {
