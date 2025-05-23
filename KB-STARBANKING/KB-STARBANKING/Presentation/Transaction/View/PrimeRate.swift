@@ -248,7 +248,7 @@ class PrimeRate: UIView {
     
     private func makeSubDescriptionText(endDate: String, maxRate: String) -> String {
         return """
-        \(endDate.toFormattedDate())까지 123,900원 모을 수 있어요.
+        \(endDate.toKoreanFormattedDate())까지 123,900원 모을 수 있어요.
         해당 상품의 최고 적용금리는 연 \(maxRate)%입니다.
         """
     }
