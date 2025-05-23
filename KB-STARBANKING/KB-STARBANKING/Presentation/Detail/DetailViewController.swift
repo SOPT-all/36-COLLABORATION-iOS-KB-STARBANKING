@@ -50,6 +50,7 @@ class DetailViewController: UIViewController {
     private func setStyle() {
         view.backgroundColor = .kbWhite
         scrollView.showsVerticalScrollIndicator = false
+        navigationController?.isNavigationBarHidden = true
     }
     
     private func setUI() {
@@ -64,7 +65,7 @@ class DetailViewController: UIViewController {
     
     private func setLayout() {
         closeHeaderView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(-40)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(48)
         }

@@ -10,6 +10,8 @@ import SnapKit
 
 class AccountInfo: UIView {
     
+    var onSettingButtonTapped: (() -> Void)?
+    
     private let accountNameLabel: UILabel = {
         let label = UILabel()
         label.font = .font(.body1_16_light)
@@ -30,9 +32,10 @@ class AccountInfo: UIView {
         return label
     }()
     
-    private let settingButton: UIButton = {
+    private lazy var settingButton: UIButton = {
         let button = UIButton()
         button.setImage(.icSettings, for: .normal)
+        button.addTarget(self, action: #selector(settingButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -102,6 +105,7 @@ class AccountInfo: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setStyle()
         setUI()
         setLayout()
@@ -240,5 +244,9 @@ class AccountInfo: UIView {
         let elapsed = now.timeIntervalSince(startDate)
         let progress = Float(elapsed / totalInterval)
         return min(max(progress, 0), 1)
+    }
+    
+    @objc private func settingButtonTapped() {
+        onSettingButtonTapped?()
     }
 }
