@@ -101,6 +101,10 @@ class TransactionViewController: UIViewController {
     }
     
     private func setNavigation() {
+        navigationView.onBackButtonTapped = { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }
+        
         accountInfo.onSettingButtonTapped = { [weak self] in
             guard let self = self else { return }
             let detailVC = DetailViewController()

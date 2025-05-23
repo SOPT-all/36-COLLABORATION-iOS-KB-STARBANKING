@@ -12,6 +12,8 @@ import Then
 
 final class NavigationView: UIView {
     
+    var onBackButtonTapped: (() -> Void)?
+    
     // MARK: - Properties
     
     private let navigationView = UIView().then {
@@ -20,6 +22,7 @@ final class NavigationView: UIView {
     
     private let backButton = UIButton().then {
         $0.setImage(.icArrowLeft, for: .normal)
+        $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
     
     private lazy var titleLabel = UILabel().then {
@@ -89,5 +92,9 @@ final class NavigationView: UIView {
             $0.trailing.equalTo(menuButton.snp.leading).offset(-18)
             $0.size.equalTo(24)
         }
+    }
+    
+    @objc private func backButtonTapped() {
+        onBackButtonTapped?()
     }
 }
