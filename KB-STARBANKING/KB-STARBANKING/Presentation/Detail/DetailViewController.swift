@@ -31,6 +31,7 @@ class DetailViewController: UIViewController {
         setStyle()
         setUI()
         setLayout()
+        setNavigation()
         fetchDetail()
     }
     
@@ -96,6 +97,14 @@ class DetailViewController: UIViewController {
             $0.horizontalEdges.equalToSuperview().inset(23)
             $0.height.equalTo(400)
             $0.bottom.equalToSuperview().inset(50)
+        }
+    }
+    
+    private func setNavigation() {
+        manageAccountView.onInterestRateTapped = { [weak self] in
+            guard let self = self else { return }
+            let interestRateVC = InterestRateViewController()
+            self.navigationController?.pushViewController(interestRateVC, animated: true)
         }
     }
 }
