@@ -98,7 +98,7 @@ final class AccountCell: UICollectionViewCell {
         newDateLabel.text = account.startDate
         endLabel.text = "만기일"
         endDateLabel.text = account.endDate
-        DdayLabel.text = account.dDay
+        DdayLabel.text = "(\(account.dDay))"
         updateBalanceLabel(with: account.accountBalance)
         wonLabel.text = "원"
     }
@@ -164,6 +164,11 @@ final class AccountCell: UICollectionViewCell {
         endDateLabel.snp.makeConstraints {
             $0.centerY.equalTo(endLabel)
             $0.leading.equalTo(endLabel.snp.trailing).offset(10)
+        }
+        
+        DdayLabel.snp.makeConstraints {
+            $0.centerY.equalTo(endDateLabel)
+            $0.leading.equalTo(endDateLabel.snp.trailing).offset(3)
         }
         
         moreButton.snp.makeConstraints {
