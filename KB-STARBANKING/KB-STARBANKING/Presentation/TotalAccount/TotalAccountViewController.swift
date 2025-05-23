@@ -40,16 +40,11 @@ class TotalAccountViewController: UIViewController {
         Task {
             do {
                 let response = try await TotalAccountService.shared.fetchTotalAccount()
-                print("총 잔액: \(response.totalAccountBalance)원")
                 
-                for account in response.accounts {
-                    print("----")
-                    print("계좌 ID: \(account.id)")
-                    print("계좌 이름: \(account.name)")
-                    print("계좌 번호: \(account.accountNumber)")
-                    print("시작일: \(account.startDate), 종료일: \(account.endDate)")
-                    print("D-Day: \(account.dDay)")
-                    print("계좌 잔액: \(account.accountBalance)원")
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.accountView.updateAccounts(response.accounts)
+                    self.depositHeader.configure(with: response)
                 }
                 
             } catch {
