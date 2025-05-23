@@ -38,12 +38,9 @@ class DetailViewController: UIViewController {
         Task {
             do {
                 let detail = try await DetailService.shared.fetchDetail(accountId: accountId)
-                print("납입회차: \(detail.depositCount)")
-                print("계좌상태: \(detail.accountState)")
-                print("최종거래일: \(detail.lastTransaction)")
-                print("계약기간: \(detail.contractPeriod)")
+                detailAccountView.configure(with: detail)
             } catch {
-                print("상세 정보 요청 실패: \(error.localizedDescription)")
+                print("계좌 상세 조회 실패: \(error.localizedDescription)")
             }
         }
     }
@@ -84,7 +81,7 @@ class DetailViewController: UIViewController {
         detailAccountView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(185)
+            $0.height.equalTo(143)
         }
         
         detailInfoView.snp.makeConstraints {
