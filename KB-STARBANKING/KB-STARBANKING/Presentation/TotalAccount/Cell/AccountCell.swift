@@ -99,13 +99,8 @@ final class AccountCell: UICollectionViewCell {
         endLabel.text = "만기일"
         endDateLabel.text = account.endDate
         DdayLabel.text = "(\(account.dDay))"
-        updateBalanceLabel(with: account.accountBalance)
+        balanceLabel.text = String(account.accountBalance).decimalFormatted
         wonLabel.text = "원"
-    }
-    
-    private func updateBalanceLabel(with balance: Int) {
-        let formatted = NumberFormatter.localizedString(from: NSNumber(value: balance), number: .decimal)
-        balanceLabel.text = formatted
     }
     
     private func setStyle() {
