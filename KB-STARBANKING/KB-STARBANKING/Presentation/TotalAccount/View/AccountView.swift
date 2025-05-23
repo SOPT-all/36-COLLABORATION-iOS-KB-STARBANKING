@@ -9,6 +9,8 @@ import UIKit
 
 final class AccountView: UIView {
     
+    var onTransactionTapped: (() -> Void)?
+    
     // MARK: - Properties
     
     private var accounts: [Account] = []
@@ -33,7 +35,7 @@ final class AccountView: UIView {
         setLayout()
         setDelegate()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -88,6 +90,8 @@ extension AccountView: UICollectionViewDataSource {
 extension AccountView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // 여기에 셀 선택 시 동작 작성
+        if indexPath.item == 1 {
+            onTransactionTapped?()
+        }
     }
 }
