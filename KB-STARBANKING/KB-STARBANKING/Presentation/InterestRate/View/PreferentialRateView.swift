@@ -12,7 +12,7 @@ import Then
 
 class PreferentialRateView: UIView {
     
-    private var rateData = RateData.dummy()
+    private var rateData: [PreferentialRate] = []
     
     private let preferLabel = UILabel().then {
         $0.text = "우대이율"
@@ -110,6 +110,11 @@ class PreferentialRateView: UIView {
         collectionView.register(RateViewCell.self, forCellWithReuseIdentifier: RateViewCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
+    }
+    
+    func configure(with interestrate: InterestRateResponse) {
+        self.rateData = interestrate.preferentialRates
+        collectionView.reloadData()
     }
 }
 

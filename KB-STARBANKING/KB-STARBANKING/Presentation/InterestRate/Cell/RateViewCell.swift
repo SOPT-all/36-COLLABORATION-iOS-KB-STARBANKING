@@ -137,19 +137,10 @@ class RateViewCell: UICollectionViewCell {
 }
 
 extension RateViewCell {
-    func dataBind(_ rateData: RateData){
-        imageView.image = rateData.image
-        nameLabel.text = rateData.title
-        rateValueLabel.text = rateData.rate
-        periodValueLabel.text = rateData.period
+    func dataBind(_ rate: PreferentialRate) {
+        imageView.image = UIImage()
+        nameLabel.text = rate.name
+        rateValueLabel.text = "\(rate.rate)"
+        periodValueLabel.text = "\(rate.startDate) ~ \(rate.endDate)"
     }
-    
-    func smartSplitTitle(_ title: String) -> String {
-        if title.contains("우대이율") {
-            let parts = title.components(separatedBy: "우대이율")
-            return parts[0] + "\n우대이율"
-        }
-        return title
-    }
-    
 }

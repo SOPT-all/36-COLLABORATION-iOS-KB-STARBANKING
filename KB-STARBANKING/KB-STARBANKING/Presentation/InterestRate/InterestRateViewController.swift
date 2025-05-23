@@ -35,7 +35,7 @@ class InterestRateViewController: UIViewController {
             do{
                 let interestRateData = try await InterestRateService.shared.fetchInterestRate(accountId: accountId)
                 
-                DispatchQueue.main.async {[weak self] in
+                DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
                     self.infoView.configure(with: interestRateData)
                     self.basicRateView.configure(with: interestRateData)
