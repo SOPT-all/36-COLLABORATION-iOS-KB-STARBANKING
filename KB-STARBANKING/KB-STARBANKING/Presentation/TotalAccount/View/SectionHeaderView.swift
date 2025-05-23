@@ -74,9 +74,15 @@ final class SectionHeaderView: UIView {
         clipsToBounds = true
     }
     
+    func configure(with totalAccount: TotalAccountResponse) {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        moneyLabel.text = formatter.string(from: NSNumber(value: totalAccount.totalAccountBalance))
+        
+    }
+    
     private func configureIsDeposit(_ isDeposit: Bool) {
         if isDeposit {
-            moneyLabel.text = "10,000"
             moneyLabel.isHidden = false
             wonLabel.isHidden = false
         } else {

@@ -33,7 +33,26 @@ class TotalAccountViewController: UIViewController {
         setStyle()
         setUI()
         setLayout()
+        fetchTotalAccount()
     }
+    
+    private func fetchTotalAccount() {
+        Task {
+            do {
+                let response = try await TotalAccountService.shared.fetchTotalAccount()
+                
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.accountView.updateAccounts(response.accounts)
+                    self.depositHeader.configure(with: response)
+                }
+                
+            } catch {
+                print("전체 계좌 불러오기 실패: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     
     // MARK: - UI Setting
     
