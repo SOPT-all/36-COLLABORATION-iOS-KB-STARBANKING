@@ -13,6 +13,8 @@ class DetailViewController: UIViewController {
     
     // MARK: - Properties
     
+    var accountId: Int = 1
+    
     private let closeHeaderView = CloseHeaderView(title: "계좌상세정보")
     private let scrollView = UIScrollView()
     private let contentView = UIView()
@@ -29,6 +31,18 @@ class DetailViewController: UIViewController {
         setStyle()
         setUI()
         setLayout()
+        fetchDetail()
+    }
+    
+    private func fetchDetail() {
+        Task {
+            do {
+                let detail = try await DetailService.shared.fetchDetail(accountId: accountId)
+                detailAccountView.configure(with: detail)
+            } catch {
+                print("계좌 상세 조회 실패: \(error.localizedDescription)")
+            }
+        }
     }
     
     // MARK: - UI Setting
@@ -67,7 +81,7 @@ class DetailViewController: UIViewController {
         detailAccountView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(185)
+            $0.height.equalTo(143)
         }
         
         detailInfoView.snp.makeConstraints {

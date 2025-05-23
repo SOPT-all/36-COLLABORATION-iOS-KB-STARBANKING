@@ -33,7 +33,6 @@ final class DetailAccountView: UIView {
         
         setUI()
         setLayout()
-        setInfoRows()
     }
     
     required init?(coder: NSCoder) {
@@ -61,14 +60,14 @@ final class DetailAccountView: UIView {
         
     }
     
-    private func setInfoRows() {
+    func configure(with detail: DetailResponse) {
         let infoData = [
-            ("납입회차", "1"),
-            ("계좌상태", "정상"),
-            ("최종거래일", "2025.04.25"),
-            ("계약기간", "12")
+            ("납입회차", "\(detail.depositCount)"),
+            ("계좌상태", detail.accountState),
+            ("최종거래일", detail.lastTransaction),
+            ("계약기간", "\(detail.contractPeriod)")
         ]
-        
+
         infoData.forEach { title, value in
             let row = createInfoRow(title: title, value: value)
             infoStackView.addArrangedSubview(row)
