@@ -8,12 +8,6 @@
 import Foundation
 
 struct TotalAccountResponse: Decodable {
-    let status: Int
-    let message: String
-    let data: TotalAccountData
-}
-
-struct TotalAccountData: Decodable {
     let totalAccountBalance: Int
     let accounts: [Account]
 }
