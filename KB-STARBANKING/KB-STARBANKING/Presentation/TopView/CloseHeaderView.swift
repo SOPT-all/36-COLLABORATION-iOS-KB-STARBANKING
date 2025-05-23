@@ -12,6 +12,8 @@ import Then
 
 final class CloseHeaderView: UIView {
     
+    var onCloseButtonTapped: (() -> Void)?
+    
     // MARK: - Properties
     
     private let headerView = UIView().then {
@@ -25,6 +27,7 @@ final class CloseHeaderView: UIView {
     
     private let xButton = UIButton().then {
         $0.setImage(.icClose, for: .normal)
+        $0.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
     }
     
     // MARK: - Life Cycle
@@ -66,5 +69,9 @@ final class CloseHeaderView: UIView {
             $0.trailing.equalToSuperview().offset(-19)
             $0.size.equalTo(24)
         }
+    }
+    
+    @objc private func closeButtonTapped() {
+        onCloseButtonTapped?()
     }
 }

@@ -101,6 +101,10 @@ class DetailViewController: UIViewController {
     }
     
     private func setNavigation() {
+        closeHeaderView.onCloseButtonTapped = { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        
         manageAccountView.onInterestRateTapped = { [weak self] in
             guard let self = self else { return }
             let interestRateVC = InterestRateViewController()
