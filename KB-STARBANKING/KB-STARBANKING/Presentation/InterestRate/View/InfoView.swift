@@ -162,30 +162,14 @@ class InfoView: UIView {
     }
     
     func configure(with interestrate: InterestRateResponse){
-        accountLabel.text = makeAccountText(name: interestrate.savingAccountName)
-        accountNumberLabel.text = makeAccountNumberText(number: interestrate.accountNumber)
+        accountLabel.text = interestrate.savingAccountName
+        accountNumberLabel.text = interestrate.accountNumber
         durationInfoLabel.text = makeDurationText(duration: interestrate.contractPeriod)
-        newDateInfoLabel.text = makeNewDateText(newDate: interestrate.startDate)
-        endDateInfoLabel.text = makeEndDateText(endDate: interestrate.endDate)
-    }
-    
-    private func makeAccountText(name: String) -> String {
-        return "\(name)"
-    }
-    
-    private func makeAccountNumberText(number: String) -> String {
-        return "\(number)"
+        newDateInfoLabel.text = interestrate.startDate
+        endDateInfoLabel.text = interestrate.endDate
     }
     
     private func makeDurationText(duration: Int) -> String {
         return "\(duration) 개월"
-    }
-    
-    private func makeNewDateText(newDate: String) -> String {
-        return "\(newDate)"
-    }
-    
-    private func makeEndDateText(endDate: String) -> String {
-        return "\(endDate)"
     }
 }
