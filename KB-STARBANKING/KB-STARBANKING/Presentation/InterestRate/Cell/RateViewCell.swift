@@ -151,4 +151,5 @@ extension RateViewCell {
         }
         return title
     }
+    
 }

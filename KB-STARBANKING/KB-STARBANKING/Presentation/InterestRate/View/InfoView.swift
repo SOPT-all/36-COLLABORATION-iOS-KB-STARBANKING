@@ -178,7 +178,7 @@ class InfoView: UIView {
     }
     
     private func makeDurationText(duration: Int) -> String {
-        return "\(duration)개월"
+        return "\(duration) 개월"
     }
     
     private func makeNewDateText(newDate: String) -> String {
