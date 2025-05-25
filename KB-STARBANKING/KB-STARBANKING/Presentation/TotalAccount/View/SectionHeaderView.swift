@@ -75,10 +75,7 @@ final class SectionHeaderView: UIView {
     }
     
     func configure(with totalAccount: TotalAccountResponse) {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        moneyLabel.text = formatter.string(from: NSNumber(value: totalAccount.totalAccountBalance))
-        
+        moneyLabel.text = String(totalAccount.totalAccountBalance).decimalFormatted
     }
     
     private func configureIsDeposit(_ isDeposit: Bool) {

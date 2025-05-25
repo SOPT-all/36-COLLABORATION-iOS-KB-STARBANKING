@@ -11,6 +11,13 @@ import SnapKit
 
 class PrimeRate: UIView {
     
+    private let highlightView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .yellow2.withAlphaComponent(0.5)
+        view.isHidden = true
+        return view
+    }()
+    
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .font(.subtitle1_18_semibold)
@@ -119,7 +126,6 @@ class PrimeRate: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setStyle()
         setUI()
         setLayout()
@@ -129,12 +135,13 @@ class PrimeRate: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setStyle(){
+    private func setStyle() {
         self.backgroundColor = .kbWhite
     }
     
     private func setUI() {
         addSubviews(
+            highlightView,
             descriptionLabel,
             subDescriptionLabel,
             paymentTopView,
@@ -147,6 +154,7 @@ class PrimeRate: UIView {
         
         paymentTopView.addSubviews(countLabel, firstDividerView, dateLabel)
         paymentBottomView.addSubviews(paymentStackView,  placeLabel, secondDividerView, newLabel)
+        
     }
     
     private func setLayout() {
@@ -235,20 +243,23 @@ class PrimeRate: UIView {
     func configure(with transaction: TransactionResponse) {
         guard let firstDeposit = transaction.deposits.first else { return }
         
-        descriptionLabel.text = makeDescriptionText(rate: transaction.preferentialRate)
+        makeDescriptionText(rate: transaction.preferentialRate)
         subDescriptionLabel.text = makeSubDescriptionText(endDate: transaction.endDate, maxRate: transaction.maxAppliedRate)
         countLabel.text = makeCountText(firstDeposit.count)
         updateDateLabel(with: firstDeposit.depositDate)
         updatePaymentItems(deposit: firstDeposit)
     }
     
-    private func makeDescriptionText(rate: String) -> String {
-        return "현재 적용 중인 우대금리는\n연 \(rate)%에요"
+    private func makeDescriptionText(rate: String) {
+        let highlightText = "연 \(rate)%"
+        descriptionLabel.text = "현재 적용 중인 우대금리는\n\(highlightText)에요"
+        layoutIfNeeded()
+        highlightTextBackground(in: descriptionLabel, highlightText: highlightText)
     }
     
     private func makeSubDescriptionText(endDate: String, maxRate: String) -> String {
         return """
-        \(endDate.toFormattedDate())까지 123,900원 모을 수 있어요.
+        \(endDate.toKoreanFormattedDate())까지 123,900원 모을 수 있어요.
         해당 상품의 최고 적용금리는 연 \(maxRate)%입니다.
         """
     }
@@ -297,5 +308,43 @@ class PrimeRate: UIView {
             hStack.addArrangedSubviews(titleLabel, valueLabel)
             paymentStackView.addArrangedSubview(hStack)
         }
+    }
+    
+    // 공부 필요
+    private func highlightTextBackground(in label: UILabel, highlightText: String) {
+        guard
+            let fullText = label.text,
+            let font = label.font,
+            let range = fullText.range(of: highlightText)
+        else {
+            highlightView.isHidden = true
+            return
+        }
+        
+        let nsRange = NSRange(range, in: fullText)
+        let attributedText = NSAttributedString(string: fullText, attributes: [.font: font])
+        let textStorage = NSTextStorage(attributedString: attributedText)
+        let layoutManager = NSLayoutManager()
+        let textContainer = NSTextContainer(size: label.bounds.size)
+        
+        textContainer.lineFragmentPadding = 0
+        textContainer.maximumNumberOfLines = label.numberOfLines
+        textContainer.lineBreakMode = label.lineBreakMode
+        
+        layoutManager.addTextContainer(textContainer)
+        textStorage.addLayoutManager(layoutManager)
+        
+        var highlightRect = CGRect.zero
+        layoutManager.enumerateEnclosingRects(forGlyphRange: nsRange, withinSelectedGlyphRange: NSRange(location: NSNotFound, length: 0), in: textContainer) { rect, _ in
+            highlightRect = rect
+        }
+        
+        highlightView.frame = CGRect(
+            x: highlightRect.origin.x + label.frame.origin.x,
+            y: highlightRect.maxY - 8 + label.frame.origin.y,
+            width: highlightRect.width,
+            height: 8
+        )
+        highlightView.isHidden = false
     }
 }

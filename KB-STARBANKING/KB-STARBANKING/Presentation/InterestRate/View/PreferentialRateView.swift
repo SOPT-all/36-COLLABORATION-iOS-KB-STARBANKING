@@ -13,6 +13,7 @@ import Then
 class PreferentialRateView: UIView {
     
     private var rateData: [PreferentialRate] = []
+    private var savingAccountName: String = ""
     
     private let preferLabel = UILabel().then {
         $0.text = "우대이율"
@@ -113,6 +114,7 @@ class PreferentialRateView: UIView {
     }
     
     func configure(with interestrate: InterestRateResponse) {
+        self.savingAccountName = interestrate.savingAccountName
         self.rateData = interestrate.preferentialRates
         collectionView.reloadData()
     }
@@ -151,7 +153,8 @@ extension PreferentialRateView: UICollectionViewDataSource {
         ) as? RateViewCell else {
             return UICollectionViewCell()
         }
-        cell.dataBind(rateData[indexPath.row])
+        cell.dataBind(savingAccountName: savingAccountName, rate: rateData[indexPath.row])
+        
         return cell
     }
 }
